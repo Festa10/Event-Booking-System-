@@ -1,14 +1,1 @@
-.DS_Store
-Thumbs.db
-
-.vscode/
-
-*.log
-*.tmp
-*.cache
-
-.env
-
-uploads/
-
-node_modules/
+.vs/
