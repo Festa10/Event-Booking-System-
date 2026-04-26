@@ -6,7 +6,7 @@
     <!-- AUTH -->
     <a href="/project/pages/login.php">🔐 Login</a>
     <a href="/project/pages/register.php">📝 Register</a>
-    <a href="/project/pages/profile.php">👤 My Profile</a>
+
 
     <a href="#">ℹ️ About</a>
 </nav>
