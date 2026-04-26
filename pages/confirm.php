@@ -11,7 +11,7 @@ $eventName = isset($_GET['name']) ? $_GET['name'] : "Unknown Event";
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EventHub - Booking Successful</title>
 
-<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../project/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -117,7 +117,7 @@ Thank you for choosing to attend: <br>
 <div class="alert alert-info py-2 mt-3">
 <small>A confirmation email will be sent shortly.</small>
 </div>
-<a href="view-events.php" class="btn btn-primary btn-lg mt-4 w-100" style="border-radius: 12px;">
+<a href="view_event.php" class="btn btn-primary btn-lg mt-4 w-100" style="border-radius: 12px;">
 Back to Events
 </a>
 </div>

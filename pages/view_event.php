@@ -11,7 +11,7 @@ require_once __DIR__ . '/../data/all_events.php';
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EventHub - Booking System</title>
 
-<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../project/assets/css/style.css">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -86,26 +86,34 @@ Book Now
 <?php endforeach; ?>
 </div>
 </div>
-
 <footer>
+
 <div class="footer-container">
-<div>
-<h3>About Us</h3>
-<p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
+
+    <div>
+        <h3>About Us</h3>
+        <p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
+    </div>
+
+    <div>
+        <h3>Quick Links</h3>
+        <a href="/project/index.php">Home</a><br>
+        <a href="/project/pages/view_event.php">Events<a/><br>
+        <a href="/project/pages/about.php">About</a>
+       
+    </div>
+
+    <div>
+        <h3>Contact</h3>
+        <p>Email: eventbooking@gmail.com</p>
+        <p>Phone: 044 552 332</p>
+    </div>
+
 </div>
-<div>
-<h3>Quick Links</h3>
-<p>Home, Events, Booking, About</p>
-</div>
-<div>
-<h3>Contact</h3>
-<p>Email: eventbooking@gmail.com</p>
-<p>Phone: 044 552 332</p>
-</div>
-</div>
+
 <p class="copyright">© 2026 Event Booking System | All Rights Reserved</p>
+
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

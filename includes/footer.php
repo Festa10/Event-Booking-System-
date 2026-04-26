@@ -9,10 +9,10 @@
 
     <div>
         <h3>Quick Links</h3>
-        <p>Home</p>
-        <p>Events</p>
-        <p>Booking</p>
-        <p>About</p>
+        <a href="/project/index.php">Home</a><br>
+        <a href="/project/pages/view_event.php">Events<a/><br>
+        <a href="/project/pages/about.php">About</a>
+       
     </div>
 
     <div>
