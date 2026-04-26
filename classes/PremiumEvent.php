@@ -1,17 +1,20 @@
 <?php
 
-
 require_once __DIR__ . '/Event.php';
 
-// 2. Trashëgimia e klasës PremiumEvent nga Event
 class PremiumEvent extends Event {
     public $benefit;
 
-    public function __construct($id, $title, $date, $price, $benefit) {
-        // Thirret konstruktori i klasës prind (Event)
-        parent::__construct($id, $title, $date, $price);
+    public function __construct($t, $d, $l, $p, $benefit) {
+       
+        parent::__construct($t, $d, $l, $p);
         $this->benefit = $benefit;
     }
-}
 
+    function display() {
+        $output = parent::display();
+        $output .= "<p>Bonus: $this->benefit</p>";
+        return $output;
+    }
+}
 ?>
