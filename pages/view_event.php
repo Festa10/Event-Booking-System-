@@ -31,20 +31,26 @@ body { background-color: #f0f2f5; font-family: 'Poppins', sans-serif; margin: 0;
 footer { background: #333; color: white; padding: 40px 0 20px; margin-top: 50px; }
 .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 .footer-container div { flex: 1; min-width: 250px; margin-bottom: 20px; }
-.footer-container h3 { font-size: 1.2rem; margin-bottom: 15px; color: #ffc107; }
+.footer-container h3 { font-size: 1.2rem; margin-bottom: 15px; color: white; }
 .footer-container p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
 .copyright { text-align: center; border-top: 1px solid #444; margin-top: 30px; padding-top: 20px; font-size: 0.8rem; opacity: 0.6; }
 </style>
 </head>
 <body>
 
+
+
 <nav class="navbar">
-<a href="../index.php"> Home</a>
-<a href="view-events.php"> Events</a>
-<a href="booking.php"> Booking</a>
-<a href="login.php"> Login</a>
-<a href="register.php"> Register</a>
-<a href="about.php"> About</a>
+    <a href="/project/#top">🏠 Home</a>
+    <a href="/project/pages/view_event.php">📅 Events</a>
+    <a href="/project/pages/booking.php">🎟 Booking</a>
+
+    <!-- AUTH -->
+    <a href="/project/pages/login.php">🔐 Login</a>
+    <a href="/project/pages/register.php">📝 Register</a>
+
+
+    <a href="#">ℹ️ About</a>
 </nav>
 
 <div class="container py-5">
