@@ -34,4 +34,4 @@ User:
 1. Vendos projektin në htdocs
 2. Starto Apache në XAMPP
 3. Hap:
-http://localhost/event-booking-system/pages/login.php
+http://localhost/event-booking-system/pages/login.php 
