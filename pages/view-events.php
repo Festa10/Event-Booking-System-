@@ -1,5 +1,5 @@
 <?php 
-// 1. Ngarkimi i të dhënave (Modeli)
+// 1. Ngarkimi i të dhënave
 require_once __DIR__ . '/../data/all_events.php'; 
 ?>
 
@@ -9,10 +9,9 @@ require_once __DIR__ . '/../data/all_events.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EventHub - Booking System</title>
-
-    <link rel="stylesheet" href="/event-booking/assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -24,12 +23,10 @@ require_once __DIR__ . '/../data/all_events.php';
         .price-badge { font-size: 1.2rem; color: #2ecc71; font-weight: 800; }
         .btn-reserve { border-radius: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Navbar Stili */
         .navbar { background: #ffffff; padding: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; justify-content: center; gap: 20px; }
         .navbar a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; }
         .navbar a:hover { color: #007bff; }
 
-        /* Footer Stili */
         footer { background: #333; color: white; padding: 40px 0 20px; margin-top: 50px; }
         .footer-container { display: flex; justify-content: space-around; flex-wrap: wrap; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .footer-container div { flex: 1; min-width: 250px; margin-bottom: 20px; }
@@ -41,12 +38,12 @@ require_once __DIR__ . '/../data/all_events.php';
 <body>
 
 <nav class="navbar">
-    <a href="/project/#top"> Home</a>
-    <a href="/project/pages/events.php"> Events</a>
-    <a href="/project/pages/booking.php"> Booking</a>
-    <a href="/project/pages/login.php"> Login</a>
-    <a href="/project/pages/register.php"> Register</a>
-    <a href="#"> About</a>
+    <a href="../index.php"> Home</a>
+    <a href="view-events.php"> Events</a>
+    <a href="booking.php"> Booking</a>
+    <a href="login.php"> Login</a>
+    <a href="register.php"> Register</a>
+    <a href="about.php"> About</a>
 </nav>
 
 <div class="container py-5">
@@ -77,7 +74,7 @@ require_once __DIR__ . '/../data/all_events.php';
                         <?php endif; ?>
                         
                         <div class="mt-auto">
-                            <a href="konfirmimi.php?name=<?php echo urlencode($e->title); ?>" 
+                            <a href="confirm.php?name=<?php echo urlencode($e->title); ?>" 
                                class="btn btn-primary w-100 btn-reserve">
                                Book Now
                             </a>
@@ -95,23 +92,19 @@ require_once __DIR__ . '/../data/all_events.php';
             <h3>About Us</h3>
             <p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
         </div>
-
         <div>
             <h3>Quick Links</h3>
             <p>Home, Events, Booking, About</p>
         </div>
-
         <div>
             <h3>Contact</h3>
             <p>Email: eventbooking@gmail.com</p>
             <p>Phone: 044 552 332</p>
         </div>
     </div>
-
     <p class="copyright">© 2026 Event Booking System | All Rights Reserved</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
