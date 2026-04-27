@@ -307,21 +307,26 @@ footer {
         background: #3730a3;
     }
 /*contact page*/
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-#0d0d0f;
---surface: #16161a;
---border: #2a2a32;
---accent: #c8f04d;
---accent2: #6c63ff;
-#e8e8f0;
---muted: #7a7a8c;
---error: #ff5f6d;
---success: #4dffa0;
---radius: 12px;
---font-head: 'Syne', sans-serif;
+
+*, *::before, *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
 :root {
---bg: --text: --font-body: 'DM Sans', sans-serif;
+  --bg: #0d0d0f;
+  --surface: #16161a;
+  --border: #2a2a32;
+  --accent: #c8f04d;
+  --accent2: #6c63ff;
+  --text: #e8e8f0;
+  --muted: #7a7a8c;
+  --error: #ff5f6d;
+  --success: #4dffa0;
+  --radius: 12px;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
 }
 body {
 background: var(--bg);
