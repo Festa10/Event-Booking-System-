@@ -1,160 +1,45 @@
-# Event Booking System - Base Application
+# Event Booking System
 
 ## Përshkrimi
-Kjo pjesë përfshin bazën e aplikacionit për projektin Event Booking System.  
-Është ndërtuar struktura kryesore e website-it, përfshirë faqen kryesore (Home), faqen e rezervimit (Booking), si dhe faqet shtesë si About, Contact dhe Event Details.  
-Gjithashtu është implementuar një klasë për menaxhimin e eventeve.
-
----
-
-## Struktura
-includes/
-- header.php (pjesa e sipërme e faqes)
-- nav.php (navbar për navigim)
-- footer.php (pjesa e poshtme)
-
-pages/
-- booking.php (faqja për rezervim)
-- events.php (lista e eventeve)
-- event-details.php (detajet e eventit)
-- about.php (informacion rreth projektit)
-- contact.php (faqja e kontaktit)
-
-classes/
-- Event.php (klasa për përfaqësimin dhe menaxhimin e eventeve)
-
-root/
-- index.php (Home page)
-
-assets/
-- css/
-- images/
-
----
+Ky projekt është një aplikacion web i zhvilluar në PHP për menaxhimin dhe rezervimin e eventeve. Sistemi përfshin autentikim të përdoruesve, role (admin/user), shfaqje të eventeve dhe funksionalitete shtesë si validimi i të dhënave dhe cookies.
 
 ## Funksionalitetet
-- Home Page me listë eventesh
-- Shfaqje e eventeve me foto dhe përshkrim
-- Faqe për detajet e eventit (Event Details)
-- Navigim përmes navbar:
-  - Home
-  - Events
-  - Booking
-  - About
-  - Contact
-  - Login / Register
-- Booking form:
-  - Full Name
-  - Email
-  - Event (sipas zgjedhjes)
-- Faqe informative:
-  - About
-  - Contact
-- Përdorimi i klasës `Event` për organizimin e të dhënave
+	• Shfaqja e eventeve (të dhëna dummy) 
+	• Faqja e detajeve të eventit 
+	• Sistemi i rezervimit (Booking) 
+	• Login / Logout i përdoruesve 
+	• Role: admin dhe user 
+	• Kontroll i aksesit sipas roleve 
+	• Përdorimi i OOP (klasa Event dhe PremiumEvent) 
+	• Sortim i eventeve 
+	• Contact form me validim 
+	• Validim me RegEx (email dhe telefon) 
+	• Përdorimi i cookies për personalizim 
+	• Menaxhimi i sesioneve (sessions) 
 
----
-
-## Karakteristikat
-- Strukturë e organizuar (includes, pages, classes, assets)
-- Përdorim i PHP include për layout të përbashkët
-- Kod i ndarë në mënyrë modulare
-- Dizajn modern dhe i pastër
-- Gati për integrim me autentikim dhe databazë
-
----
-
-## Ekzekutimi
-1. Vendos projektin në:
-   C:\xampp\htdocs\project
-
-2. Starto Apache në XAMPP
-
-3. Hap në browser:
-   http://localhost/project/
-
----
-
-# Event Booking System - Auth Module
-
-## Përshkrimi
-Kjo pjesë përfshin sistemin e login/logout për projektin Event Booking System, pa përdorur databazë.  
-Përdoren përdorues të definuar në kod (hardcoded), session dhe role (admin/user).
-
-## Struktura
-includes/
-- auth.php (logjika e login dhe session)
-- users.php (përdoruesit)
-
-pages/
-- login.php
-- logout.php
-- dashboard.php
-- admin.php
-
-## Funksionalitetet
-- Login / Logout
-- Session për ruajtjen e përdoruesit
-- Role: admin dhe user
-- Kontroll i aksesit sipas rolit
+## Struktura e projektit
+	• includes/ → header, navbar, footer, auth, cookies, users, validation
+	• pages/ → faqet kryesore (about, event, booking, login, contact, etj.) 
+	• classes/ → klasat PHP (Event, PremiumEvent) 
+	• assets/ → CSS dhe imazhe 
+  • data/ → all_events
+	• index.php → faqja kryesore 
 
 ## Kredencialet
 Admin:
-- username: admin
-- password: admin123
-
+username: admin
+password: admin123
 User:
-- username: user
-- password: user123
+username: user
+password: user123
 
 ## Ekzekutimi
-1. Vendos projektin në htdocs
-2. Starto Apache në XAMPP
-3. Hap:
-http://localhost/event-booking-system/pages/login.php
+	1. Vendos projektin në: C:\xampp\htdocs\project
+	2. Starto Apache në XAMPP
+	3. Hap në browser:  http://localhost/project/
 
-
-# Event Booking System - Sistemi i Eventeve
-Në këtë projekt, unë kam punuar në shtyllën kryesore të aplikacionit, duke përfshirë arkitekturën e të dhënave, logjikën e procesimit dhe ndërfaqen dinamike të përdoruesit.
-
-- Kam krijuar strukturën e eventeve duke aplikuar parimet e trashëgimisë:
-- Klasa PremiumEvent: Kam zgjeruar klasën bazë Event për të shtuar funksionalitete specifike për eventet VIP.
-- Method Overriding: Kam bërë override metodën display() për të përfshirë përfitimet (bonuset) shtesë në mënyrë dinamike.
-- Konstruktori: Përdorimi i parent::__construct për të ruajtur integritetin e të dhënave të klasës prind.
-
-- Strukturimi: Kam krijuar koleksionin prej 10 eventesh (miksim i objekteve Simple dhe Premium), duke simuluar një bazë të dhënash reale.
-- Algoritmi i Sortimit: Kam implementuar funksionin usort me operatorin spaceship (<=>) për të renditur eventet automatikisht nga çmimi më i ulët te ai më i larti.
-
-- Dizajn Modern: Përdorimi i Bootstrap 5 dhe CSS3 për krijimin e "Event Cards" me efekte interaktive (hover, shadows).
-- Logjika Kondicionale: Përdorimi i instanceof në PHP për të ndryshuar pamjen e faqes (psh. shtimi i shkëlqimit dhe badge-it "PREMIUM" vetëm për eventet përkatëse).
-- Komunikimi midis Faqeve: Implementimi i metodës $_GET për të bartur emrin e eventit nga lista te faqja e konfirmimit, duke siguruar një "User Journey" të rrjedhshëm.
-
- # Validation & Additional Functionality
-📩 Contact Form (contact.php)
-
-Forma e kontaktit është implementuar me kontroll të plotë të inputeve. Sistemi verifikon të dhënat përpara se ato të përpunohen, duke parandaluar gabimet dhe inputet e pavlefshme.
-
-🔍 RegEx Validation
-
-Përdoren Regular Expressions (RegEx) për validimin e:
-
-Email-it (format korrekt)
-Numrit të telefonit (sipas pattern-it të caktuar)
-
-Kjo rrit saktësinë dhe besueshmërinë e të dhënave të futura nga përdoruesi.
-
-🛠️ validation.php
-
-Ky file përmban funksione të dedikuara për validim. Kjo qasje:
-
-E bën kodin më të organizuar
-Lejon ripërdorimin e funksioneve në pjesë të ndryshme të aplikacionit
-🍪 Cookies
-
-Implementuar për:
-
-Cookie consent (pranimi i cookies nga përdoruesi)
-Ruajtjen e preferencave të përdoruesit
-
-Cookies ndihmojnë në përmirësimin e eksperiencës së përdorimit dhe ndërveprimit me aplikacionin.
-
-
+ ## Anëtarët e projektit
+  • Eliona Muja
+  • Festa Berisha
+  • Fiona Grabovci
+  • Jeta Podrimcaku
