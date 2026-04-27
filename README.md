@@ -110,4 +110,22 @@ User:
 1. Vendos projektin në htdocs
 2. Starto Apache në XAMPP
 3. Hap:
-http://localhost/event-booking-system/pages/login.php 
+http://localhost/event-booking-system/pages/login.php
+
+
+# Event Booking System - Sistemi i Eventeve
+Në këtë projekt, unë kam punuar në shtyllën kryesore të aplikacionit, duke përfshirë arkitekturën e të dhënave, logjikën e procesimit dhe ndërfaqen dinamike të përdoruesit.
+
+- Kam krijuar strukturën e eventeve duke aplikuar parimet e trashëgimisë:
+- Klasa PremiumEvent: Kam zgjeruar klasën bazë Event për të shtuar funksionalitete specifike për eventet VIP.
+- Method Overriding: Kam bërë override metodën display() për të përfshirë përfitimet (bonuset) shtesë në mënyrë dinamike.
+- Konstruktori: Përdorimi i parent::__construct për të ruajtur integritetin e të dhënave të klasës prind.
+
+- Strukturimi: Kam krijuar koleksionin prej 10 eventesh (miksim i objekteve Simple dhe Premium), duke simuluar një bazë të dhënash reale.
+- Algoritmi i Sortimit: Kam implementuar funksionin usort me operatorin spaceship (<=>) për të renditur eventet automatikisht nga çmimi më i ulët te ai më i larti.
+
+- Dizajn Modern: Përdorimi i Bootstrap 5 dhe CSS3 për krijimin e "Event Cards" me efekte interaktive (hover, shadows).
+- Logjika Kondicionale: Përdorimi i instanceof në PHP për të ndryshuar pamjen e faqes (psh. shtimi i shkëlqimit dhe badge-it "PREMIUM" vetëm për eventet përkatëse).
+- Komunikimi midis Faqeve: Implementimi i metodës $_GET për të bartur emrin e eventit nga lista te faqja e konfirmimit, duke siguruar një "User Journey" të rrjedhshëm.
+
+
