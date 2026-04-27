@@ -50,7 +50,7 @@ footer { background: #333; color: white; padding: 40px 0 20px; margin-top: 50px;
     <a href="/project/pages/register.php">📝 Register</a>
 
 
-    <a href="#">ℹ️ About</a>
+    <a href="/project/pages/contact.php">ℹ️ About</a>
 </nav>
 
 <div class="container py-5">
@@ -105,7 +105,7 @@ Book Now
         <h3>Quick Links</h3>
         <a href="/project/index.php">Home</a><br>
         <a href="/project/pages/view_event.php">Events<a/><br>
-        <a href="/project/pages/about.php">About</a>
+        <a href="/project/pages/contact.php">About</a>
        
     </div>
 

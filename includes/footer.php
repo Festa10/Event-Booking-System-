@@ -11,7 +11,7 @@
         <h3>Quick Links</h3>
         <a href="/project/index.php">Home</a><br>
         <a href="/project/pages/view_event.php">Events<a/><br>
-        <a href="/project/pages/about.php">About</a>
+        <a href="/project/pages/contact.php">About</a>
        
     </div>
 

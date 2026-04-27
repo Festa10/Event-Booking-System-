@@ -7,7 +7,7 @@
     <a href="/project/pages/login.php">🔐 Login</a>
     <a href="/project/pages/register.php">📝 Register</a>
 
-    <a href="../pages/contact.php">ℹ️About</a>
+    <a href="/project/pages/contact.php">ℹ️About</a>
     
   
 </nav>
