@@ -129,8 +129,10 @@ input{
 
 </div>
 
-<p class="copyright">© 2026 Event Booking System | All Rights Reserved</p>
-
+ <div class="footer-bottom">
+    © 2026 Event Booking System | All Rights Reserved
+ </div>
+ 
 </footer>
 </body>
 </html>
