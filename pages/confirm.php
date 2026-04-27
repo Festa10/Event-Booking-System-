@@ -16,94 +16,100 @@ $eventName = isset($_GET['name']) ? $_GET['name'] : "Unknown Event";
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
 body {
-background-color: #f8f9fa;
-font-family: 'Poppins', sans-serif;
-margin: 0;
-display: flex;
-flex-direction: column;
-min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f4f6fb;
+    font-family: 'Poppins', Arial;
 }
 
-.navbar {
-background: #fff;
-padding: 1rem;
-box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-display: flex;
-justify-content: center;
-gap: 20px;
-}
-.navbar a {
-text-decoration: none;
-color: #333;
-font-weight: 500;
-transition: 0.3s;
-}
-.navbar a:hover { color: #007bff; }
-
-.main-content {
-flex: 1;
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 40px 20px;
+.page-center {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 50px; 
 }
 
-.success-card {
-max-width: 500px;
-width: 100%;
-border: none;
-border-radius: 25px;
-box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-background: white;
-}
-
-.icon-circle {
-width: 80px;
-height: 80px;
-background: #d4edda;
-color: #28a745;
-border-radius: 50%;
-display: flex;
-align-items: center;
-justify-content: center;
-font-size: 40px;
-margin: 0 auto 20px;
-}
 
 footer {
-background: #333;
-color: white;
-padding: 40px 0 20px;
+    flex-shrink: 0;
+    background: #0f172a;
+    color: #cbd5e1;
+    padding: 40px 20px;
+    margin-top: auto; 
 }
+
 .footer-container {
-display: flex;
-justify-content: space-around;
-flex-wrap: wrap;
-max-width: 1100px;
-margin: 0 auto;
-padding: 0 20px;
+    display: flex; 
+    justify-content: space-between; 
+    padding: 20px 40px;
+    background-color: #1a1a2e;
+    color: #ffffff;
 }
-.footer-container div { flex: 1; min-width: 200px; margin-bottom: 20px; }
-.footer-container h3 { font-size: 1.2rem; margin-bottom: 15px; color: #ffc107; }
-.footer-container p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
-.copyright {
-text-align: center;
-border-top: 1px solid #444;
-margin-top: 30px;
-padding-top: 20px;
-font-size: 0.8rem;
-opacity: 0.6;
+
+.footer-section {
+    flex: 1; 
+    padding: 0 15px;
 }
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    background-color: #161625;
+    font-size: 12px;
+}
+
+
+.navbar {
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 60px; 
+}
+
+.box {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.title { text-align: center; font-weight: bold; margin-bottom: 20px; }
+input { border-radius: 10px !important; }
+.btn { border-radius: 10px; }
 </style>
 </head>
 <body>
 
+
 <nav class="navbar">
-<a href="../index.php"> Home</a>
-<a href="view-events.php"> Events</a>
-<a href="booking.php"> Booking</a>
-<a href="#"> About</a>
+    <a href="/project/#top">🏠 Home</a>
+    <a href="/project/pages/view_event.php">📅 Events</a>
+    <a href="/project/pages/booking.php">🎟 Booking</a>
+    <a href="/project/pages/login.php">🔐 Login</a>
+    <a href="/project/pages/register.php">📝 Register</a>
+     <a href="/project/pages/contact.php">ℹ️ About</a>
 </nav>
 
 <div class="main-content">
@@ -124,17 +130,29 @@ Back to Events
 </div>
 
 <footer>
-<div class="footer-container">
-<div>
-<h3>About Us</h3>
-<p>We provide the best event booking experience.</p>
-</div>
-<div>
-<h3>Contact</h3>
-<p>Email: eventbooking@gmail.com</p>
-</div>
-</div>
-<p class="copyright">© 2026 Event Booking System | All Rights Reserved</p>
+ <div class="footer-container">
+     <div>
+        <h3>About Us</h3>
+        <p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
+     </div>
+
+    <div>
+        <h3>Quick Links</h3>
+        <a href="/project/index.php">Home</a><br>
+        <a href="/project/pages/view_event.php">Events<a/><br>
+        <a href="/project/pages/contact.php">About</a>
+    </div>
+
+    <div>
+        <h3>Contact</h3>
+        <p>Email: eventbooking@gmail.com</p>
+        <p>Phone: 044 552 332</p>
+    </div>
+ </div>
+
+ <div class="footer-bottom">
+    © 2026 Event Booking System | All Rights Reserved
+ </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
