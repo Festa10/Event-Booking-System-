@@ -3,7 +3,6 @@
 <?php
 /**
 * contact.php – Contact Page
-* Personi 4: Validimi & Shtesat
 */
 require_once 'includes/validation.php';
 require_once 'includes/cookies.php';
@@ -30,12 +29,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
 $formData = getPostData($fields);
 $errors = validateContactForm($formData);
 if (empty($errors)) {
-// Save name/email/phone to cookies for next visit
+
 if (hasCookieConsent()) {
 saveFormCookies($formData);
 }
-// TODO: Replace with your actual send logic (mail(), DB insert, etc.)
-// mail('info@yourdomain.com', 'Kontakt i ri', $formData['message']);
+
 $success = true;
 $formData = ['name' => $saved['name'], 'email' => $saved['email'], 'phone' => $saved[
 }
