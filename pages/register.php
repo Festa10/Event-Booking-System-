@@ -117,7 +117,7 @@ input { border-radius: 10px !important; }
 
 <nav class="navbar">
     <a href="/project/#top">🏠 Home</a>
-    <a href="/project/pages/events.php">📅 Events</a>
+    <a href="/project/pages/view_event.php">📅 Events</a>
     <a href="/project/pages/booking.php">🎟 Booking</a>
     <a href="/project/pages/login.php">🔐 Login</a>
     <a href="/project/pages/register.php">📝 Register</a>

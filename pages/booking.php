@@ -18,7 +18,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="booking-box">
 
-        <h2>Book Event</h2>
+       <h2 style="text-align: center;">Book Event</h2>
+
 
         <form method="POST">
 
