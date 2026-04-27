@@ -20,44 +20,62 @@ $user = getUser();
 
 
 <style>
-
 html, body {
     height: 100%;
     margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: #f8fafc;
 }
-
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: #f4f6fb;
-    font-family: 'Poppins', Arial;
 }
 
-.page-center {
-    flex: 1; 
+.topbar {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
+.welcome {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.card-box {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.2s;
+    text-align: center;
+}
+
+.card-box:hover {
+    transform: translateY(-5px);
+}
 
 footer {
-    flex-shrink: 0;
+    margin-top: auto; 
     background: #0f172a;
     color: #cbd5e1;
-    padding: 40px 20px;
-    margin-top: auto; 
+}
 
 .footer-container {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 20px 40px;
-    background-color: #1a1a2e; 
-    color: #ffffff;
 }
 
 .footer-section {
@@ -65,79 +83,11 @@ footer {
     padding: 0 15px;
 }
 
-.footer-section h3 {
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.footer-section ul {
-    list-style: none; 
-    padding: 0;
-}
-
 .footer-bottom {
     text-align: center;
     padding: 10px;
     background-color: #161625;
     font-size: 12px;
-}
-
-
-.navbar {
-    padding: 20px;
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 60px;
-}
-
-.box {
-    background: white;
-    width: 100%;
-    max-width: 380px;
-    padding: 35px;
-    border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-}
-.title { text-align: center; font-weight: bold; margin-bottom: 20px; }
-input { border-radius: 10px !important; }
-.btn { border-radius: 10px; }
-
-body{
-    background:#f8fafc;
-    font-family: 'Poppins', Arial;
-}
-.topbar{
-    background:white;
-    padding:15px 20px;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.05);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.welcome{
-    background:linear-gradient(135deg, #667eea, #764ba2);
-    color:white;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.1);
-}
-.card-box{
-    background:white;
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 8px 20px rgba(0,0,0,0.05);
-    transition:0.2s;
-}
-.card-box:hover{
-    transform:translateY(-5px);
-}
-.icon{
-    font-size:26px;
-}
-.num{
-    font-size:26px;
-    font-weight:bold;
 }
 </style>
 </head>
