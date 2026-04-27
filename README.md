@@ -128,4 +128,33 @@ Në këtë projekt, unë kam punuar në shtyllën kryesore të aplikacionit, duk
 - Logjika Kondicionale: Përdorimi i instanceof në PHP për të ndryshuar pamjen e faqes (psh. shtimi i shkëlqimit dhe badge-it "PREMIUM" vetëm për eventet përkatëse).
 - Komunikimi midis Faqeve: Implementimi i metodës $_GET për të bartur emrin e eventit nga lista te faqja e konfirmimit, duke siguruar një "User Journey" të rrjedhshëm.
 
+ # Validation & Additional Functionality
+📩 Contact Form (contact.php)
+
+Forma e kontaktit është implementuar me kontroll të plotë të inputeve. Sistemi verifikon të dhënat përpara se ato të përpunohen, duke parandaluar gabimet dhe inputet e pavlefshme.
+
+🔍 RegEx Validation
+
+Përdoren Regular Expressions (RegEx) për validimin e:
+
+Email-it (format korrekt)
+Numrit të telefonit (sipas pattern-it të caktuar)
+
+Kjo rrit saktësinë dhe besueshmërinë e të dhënave të futura nga përdoruesi.
+
+🛠️ validation.php
+
+Ky file përmban funksione të dedikuara për validim. Kjo qasje:
+
+E bën kodin më të organizuar
+Lejon ripërdorimin e funksioneve në pjesë të ndryshme të aplikacionit
+🍪 Cookies
+
+Implementuar për:
+
+Cookie consent (pranimi i cookies nga përdoruesi)
+Ruajtjen e preferencave të përdoruesit
+
+Cookies ndihmojnë në përmirësimin e eksperiencës së përdorimit dhe ndërveprimit me aplikacionin.
+
 
