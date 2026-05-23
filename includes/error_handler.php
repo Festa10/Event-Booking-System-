@@ -8,7 +8,6 @@ set_error_handler("myErrorHandler");
 try {
    
 } catch (Exception $e) {
- 
     echo "Gabim: " . $e->getMessage();
 }
 ?>
