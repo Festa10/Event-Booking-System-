@@ -1,61 +1,94 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
-require_once "users.php";
+require_once "database.php";
+/*
+    LOGIN FUNCTION (DB + SECURITY)
+*/
+function login($email, $password) {
+    global $conn;
 
-// LOGIN
-function login($username, $password) {
-    global $users;
+    $stmt = $conn->prepare("SELECT id, name, email, password, role FROM users WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
 
-    foreach ($users as $user) {
-        if ($user["username"] === $username && $user["password"] === $password) {
+    $stmt->store_result();
+
+    if ($stmt->num_rows === 1) {
+
+        $stmt->bind_result($id, $name, $emailDB, $passwordDB, $role);
+        $stmt->fetch();
+
+        if (password_verify($password, $passwordDB)) {
+
+            session_regenerate_id(true);
 
             $_SESSION["user"] = [
-                "username" => $user["username"],
-                "role" => $user["role"]
+                "id" => $id,
+                "name" => htmlspecialchars($name),
+                "email" => htmlspecialchars($emailDB),
+                "role" => $role
             ];
-
-            // cookie për personalizim (bonus)
-            setcookie("username", $user["username"], time() + 3600);
 
             return true;
         }
     }
+
     return false;
 }
 
-// CHECK LOGIN
+/*
+    CHECK IF LOGGED IN
+*/
 function isLoggedIn() {
     return isset($_SESSION["user"]);
 }
 
-// GET USER
+/*
+    GET USER DATA
+*/
 function getUser() {
     return $_SESSION["user"] ?? null;
 }
 
-// GET ROLE
+/*
+    GET ROLE
+*/
 function getRole() {
     return $_SESSION["user"]["role"] ?? null;
 }
 
-// LOGOUT
+/*
+    LOGOUT
+*/
 function logout() {
+    $_SESSION = [];
     session_unset();
     session_destroy();
 }
 
-// PROTECT PAGE
+
+/*
+    PROTECT PAGE (LOGIN REQUIRED)
+*/
 function requireLogin() {
     if (!isLoggedIn()) {
-        header("Location: login.php");
+        header("Location: /project/pages/login.php");
         exit();
     }
 }
 
-// ROLE CONTROL
-function requireRole($role) {
-    if (!isLoggedIn() || getRole() !== $role) {
-        echo "<h3>Access denied!</h3>";
+function requireRole(array $roles) {
+    if (!isLoggedIn()) {
+        header("Location: /project/pages/login.php");
+        exit();
+    }
+
+    if (!in_array(getRole(), $roles)) {
+        header("Location: /project/pages/dashboard.php");
         exit();
     }
 }
+?>

@@ -1,8 +1,16 @@
 <?php
 require_once "../includes/auth.php";
+require_once "../includes/database.php";
+
+// PROTECT ADMIN PAGE
 requireRole("admin");
 
 $user = getUser();
+
+// STATS FROM DATABASE
+$events = $conn->query("SELECT COUNT(*) AS total FROM events")->fetch_assoc()['total'];
+$users = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'];
+$bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_assoc()['total'];
 ?>
 
 <!DOCTYPE html>
@@ -61,67 +69,36 @@ body{
 <div class="container py-4">
 
     <div class="top mb-4">
-        <div>Admin Panel - <b><?php echo $user["username"]; ?></b></div>
+        <div>Admin Panel - <b><?php echo $user["name"]; ?></b></div>
         <a href="logout.php" class="btn btn-outline-primary btn-sm">Logout</a>
     </div>
 
     <div class="row g-4">
 
-        <div class="col-md-4">
-            <div class="card card-box p-4 text-center">
-                <h6>Events</h6>
-                <h2 class="text-primary">12</h2>
-            </div>
+    <div class="col-md-4">
+        <div class="card card-box p-4 text-center">
+            <h6>Events</h6>
+            <h2 class="text-primary"><?php echo $events; ?></h2>
         </div>
-
-        <div class="col-md-4">
-            <div class="card card-box p-4 text-center">
-                <h6>Users</h6>
-                <h2 class="text-success">45</h2>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card card-box p-4 text-center">
-                <h6>Reservations</h6>
-                <h2 class="text-warning">30</h2>
-            </div>
-        </div>
-
     </div>
 
-    <div class="card card-box p-4 mt-4 text-center">
-        <a href="add-event.php" class="btn btn-primary me-2">Add Event</a>
-        <a href="manage-events.php" class="btn btn-outline-primary">Manage</a>
+    <div class="col-md-4">
+        <div class="card card-box p-4 text-center">
+            <h6>Users</h6>
+            <h2 class="text-success"><?php echo $users; ?></h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card card-box p-4 text-center">
+            <h6>Reservations</h6>
+            <h2 class="text-warning"><?php echo $bookings; ?></h2>
+        </div>
     </div>
 
 </div>
 
-<footer>
- <div class="footer-container">
-     <div>
-        <h3>About Us</h3>
-        <p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
-    </div>
-
-    <div>
-        <h3>Quick Links</h3>
-        <a href="/project/index.php">Home</a><br>
-        <a href="/project/pages/view_event.php">Events<a/><br>
-        <a href="/project/pages/about.php">About</a>
-    </div>
-
-    <div>
-        <h3>Contact</h3>
-        <p>Email: eventbooking@gmail.com</p>
-        <p>Phone: 044 552 332</p>
-    </div>
- </div>
-
- <div class="footer-bottom">
-    © 2026 Event Booking System | All Rights Reserved
- </div>
-</footer>
+<?php include("../includes/footer.php"); ?>
 
 </body>
 </html>

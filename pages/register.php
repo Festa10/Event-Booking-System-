@@ -1,15 +1,52 @@
 <?php
+include("../includes/database.php");
+require_once("../includes/validation.php");
+
 $error = "";
 $success = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
 
-    if (!empty($username) && !empty($password)) {
-        $success = "Account created successfully! You can now log in.";
-    } else {
+    // 🔥 CLEAN INPUT (vetëm sanitize një herë)
+    $username = sanitizeInput($_POST["username"]);
+    $email = sanitizeInput($_POST["email"]);
+    $password = $_POST["password"];
+
+    // 🔥 VALIDATION (centralized)
+    if (!validateRequired($username) || !validateRequired($email) || !validateRequired($password)) {
         $error = "Please fill in all fields!";
+    }
+    elseif (!validateEmail($email)) {
+        $error = "Invalid email format!";
+    }
+    elseif (strlen($password) < 6) {
+        $error = "Password must be at least 6 characters!";
+    }
+    else {
+
+        // 🔥 CHECK IF EMAIL EXISTS (prepared statement)
+        $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
+        $check->bind_param("s", $email);
+        $check->execute();
+        $check->store_result();
+
+        if ($check->num_rows > 0) {
+            $error = "Email already exists!";
+        } else {
+
+            // 🔥 HASH PASSWORD (security standard)
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            // 🔥 INSERT USER
+            $stmt = $conn->prepare("INSERT INTO users(name, email, password, role) VALUES(?, ?, ?, 'user')");
+            $stmt->bind_param("sss", $username, $email, $hashedPassword);
+
+            if ($stmt->execute()) {
+                $success = "Account created successfully! You can now log in.";
+            } else {
+                $error = "Something went wrong!";
+            }
+        }
     }
 }
 ?>
@@ -134,7 +171,9 @@ input { border-radius: 10px !important; }
 
         <input type="text" name="username" class="form-control mb-3" placeholder="Username">
 
-        <input type="password" name="password" class="form-control mb-3" placeholder="Password">
+        <input type="email" name="email" class="form-control mb-3" placeholder="Email">
+
+         <input type="password" name="password" class="form-control mb-3" placeholder="Password">
 
         <?php if ($error): ?>
             <div class="alert alert-danger text-center"><?= $error ?></div>
@@ -156,31 +195,8 @@ input { border-radius: 10px !important; }
 
 </div>
 
-<footer>
- <div class="footer-container">
-     <div>
-        <h3>About Us</h3>
-        <p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
-     </div>
-
-    <div>
-        <h3>Quick Links</h3>
-        <a href="/project/index.php">Home</a><br>
-        <a href="/project/pages/view_event.php">Events<a/><br>
-        <a href="/project/pages/contact.php">About</a>
-    </div>
-
-    <div>
-        <h3>Contact</h3>
-        <p>Email: eventbooking@gmail.com</p>
-        <p>Phone: 044 552 332</p>
-    </div>
- </div>
-
- <div class="footer-bottom">
-    © 2026 Event Booking System | All Rights Reserved
- </div>
-</footer>
+<?php include("../includes/footer.php"); ?>
 
 </body>
 </html>
+

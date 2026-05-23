@@ -1,17 +1,43 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require_once "../includes/auth.php";
+require_once "../includes/validation.php";
 
 $error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST["username"]);
-    $password = trim($_POST["password"]);
 
-    if (login($username, $password)) {
-        header("Location: dashboard.php");
-        exit();
+    // CLEAN INPUT
+    $email = sanitizeInput($_POST["email"]);
+    $password = $_POST["password"];
+
+    // VALIDATION
+    if (!validateRequired($email) || !validateRequired($password)) {
+
+        $error = "Please fill in all fields!";
+
+    } elseif (!validateEmail($email)) {
+
+        $error = "Invalid email format!";
+
     } else {
-        $error = "Invalid credentials!";
+
+      if (login($email, $password)) {
+
+    // ruaj rolin në session
+    if (getRole() === "admin") {
+        header("Location: ../admin/dashboard.php");
+    } else {
+        header("Location: dashboard.php"); // USER -> dashboard
+    }
+
+    exit();
+
+} else {
+    $error = "Invalid credentials!";
+}
     }
 }
 ?>
@@ -133,7 +159,7 @@ input { border-radius: 10px !important; }
 
     <form method="POST">
 
-        <input type="text" name="username" class="form-control mb-3" placeholder="Username">
+        <input type="email" name="email" class="form-control mb-3" placeholder="Email">
 
         <input type="password" name="password" class="form-control mb-3" placeholder="Password">
 
@@ -151,35 +177,8 @@ input { border-radius: 10px !important; }
 
 </div>
 
-<footer>
+<?php include("../includes/footer.php"); ?>
 
-<div class="footer-container">
-
-    <div>
-        <h3>About Us</h3>
-        <p>We provide the best event booking experience for concerts, weddings, festivals and more.</p>
-    </div>
-
-    <div>
-        <h3>Quick Links</h3>
-        <a href="/project/index.php">Home</a><br>
-        <a href="/project/pages/view_event.php">Events<a/><br>
-        <a href="/project/pages/contact.php">About</a>
-       
-    </div>
-
-    <div>
-        <h3>Contact</h3>
-        <p>Email: eventbooking@gmail.com</p>
-        <p>Phone: 044 552 332</p>
-    </div>
-
-</div>
-
- <div class="footer-bottom">
-    © 2026 Event Booking System | All Rights Reserved
- </div>
- 
-</footer>
 </body>
 </html>
+

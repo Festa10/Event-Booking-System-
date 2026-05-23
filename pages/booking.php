@@ -40,6 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </div>
 
+    <?php include __DIR__ . '/../includes/footer.php'; ?>
+
+
 </section>
 
-<?php include __DIR__ . '/../includes/footer.php'; ?>
