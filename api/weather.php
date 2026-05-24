@@ -1,4 +1,5 @@
 <?php 
+// 1. LIDHJA ME HEADER
 include __DIR__ . "/../includes/header.php"; 
 ?>
 
@@ -8,17 +9,6 @@ include __DIR__ . "/../includes/header.php";
 <style>
     body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; }
     
-    nav ul { 
-        display: flex !important; 
-        list-style: none !important; 
-        gap: 20px; 
-        padding: 15px;
-        background: white;
-        margin: 0;
-        justify-content: center;
-    }
-    nav ul li a { text-decoration: none !important; color: #333; font-weight: 500; }
-
     .weather-container {
         background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
         min-height: 70vh;
@@ -42,16 +32,6 @@ include __DIR__ . "/../includes/header.php";
         color: white !important;
         padding: 60px 0 20px 0 !important;
     }
-    .footer-container {
-        display: flex !important;
-        justify-content: space-around !important;
-        max-width: 1200px;
-        margin: 0 auto;
-        flex-wrap: wrap;
-    }
-    .footer-container div { flex: 1; min-width: 250px; padding: 15px; }
-    .footer-container h3 { font-size: 20px; margin-bottom: 15px; color: white; }
-    .footer-container a { color: #3498db !important; text-decoration: none; }
 </style>
 
 <div class="weather-container">
@@ -76,12 +56,13 @@ include __DIR__ . "/../includes/header.php";
         return null;
     }
 
+    // Merr qytetin nga URL
     $cityInput = (isset($_GET['city']) && !empty($_GET['city'])) ? $_GET['city'] : "Prishtina";
     $w = getLiveWeather($cityInput);
 
     if ($w): ?>
         <div class="weather-card">
-            <h2 class="fw-bold mb-1">Moti në <?php echo $w['city']; ?></h2>
+            <h2 class="fw-bold mb-1">Moti në <?php echo htmlspecialchars($w['city']); ?></h2>
             <p class="text-muted small mb-4">Parashikimi live për eventin tuaj</p>
             
             <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 130px; height: 130px;">
@@ -103,4 +84,13 @@ include __DIR__ . "/../includes/header.php";
         <div class="weather-card border border-danger">
             <i class="fas fa-exclamation-triangle text-danger display-4 mb-3"></i>
             <h3 class="fw-bold text-danger">Qyteti nuk u gjet!</h3>
-            <p class="text-muted">
+            <p class="text-muted">API nuk mund të gjejë motin për: <br><strong>"<?php echo htmlspecialchars($cityInput); ?>"</strong></p>
+            <a href="../data/all_events.php" class="btn btn-danger w-100 mt-3">Kthehu dhe rregulloje</a>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php 
+// 2. LIDHJA ME FOOTER
+include __DIR__ . "/../includes/footer.php"; 
+?>
