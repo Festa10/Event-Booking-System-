@@ -35,3 +35,16 @@ function getEventWeather($city) {
         return null;
     }
 }
+
+$city = "Prishtina"; 
+$weather = getEventWeather($city);
+
+if ($weather) {
+    echo "<h1>Informacionet mbi Motin</h1>";
+    echo "<strong>Qyteti:</strong> " . $city . "<br>";
+    echo "<strong>Temperatura:</strong> " . $weather['temp'] . "°C <br>";
+    echo "<strong>Kushtet:</strong> " . $weather['desc'] . "<br>";
+    echo "<img src='http://openweathermap.org/img/wn/" . $weather['icon'] . "@2x.png' alt='Weather icon'>";
+} else {
+    echo "Gabim: Nuk mund të merren të dhënat e motit.";
+}
