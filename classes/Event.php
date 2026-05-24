@@ -3,17 +3,17 @@
 class Event {
 
     private $conn;
-    private $table = "events";
+    public $table = "events";
 
     public $title;
     public $date;
     public $location;
     public $price;
+    public $category; // Shto këtë rresht
 
     public $id;
     public $description;
     public $event_date;
-    public $category;
     public $image;
 
     public function __construct($db = null, $t = null, $d = null, $l = null, $p = null) {
@@ -38,22 +38,21 @@ class Event {
     }
 
     public function create() {
+    $query = "INSERT INTO " . $this->table . " 
+              (title, description, event_date, category, image) 
+              VALUES 
+              (:title, :description, :event_date, :category, :image)";
 
-        $query = "INSERT INTO $this->table
-        (title, description, event_date, category, image)
-        VALUES
-        (:title, :description, :event_date, :category, :image)";
+    $stmt = $this->conn->prepare($query);
 
-        $stmt = $this->conn->prepare($query);
+    $stmt->bindParam(':title', $this->title);
+    $stmt->bindParam(':description', $this->description);
+    $stmt->bindParam(':event_date', $this->event_date);
+    $stmt->bindParam(':category', $this->category); // Kjo rresht po të mungonte!
+    $stmt->bindParam(':image', $this->image);
 
-        $stmt->bindParam(':title', $this->title);
-        $stmt->bindParam(':description', $this->description);
-        $stmt->bindParam(':event_date', $this->event_date);
-        $stmt->bindParam(':category', $this->category);
-        $stmt->bindParam(':image', $this->image);
-
-        return $stmt->execute();
-    }
+    return $stmt->execute();
+}
 
     public function read() {
 
@@ -81,7 +80,6 @@ class Event {
         title=:title,
         description=:description,
         event_date=:event_date,
-        category=:category,
         image=:image
         WHERE id=:id";
 
@@ -90,7 +88,6 @@ class Event {
         $stmt->bindParam(':title', $this->title);
         $stmt->bindParam(':description', $this->description);
         $stmt->bindParam(':event_date', $this->event_date);
-        $stmt->bindParam(':category', $this->category);
         $stmt->bindParam(':image', $this->image);
         $stmt->bindParam(':id', $this->id);
 

@@ -62,7 +62,7 @@ body {
 .hero {
     text-align: center;
     padding: 90px 20px;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    background: linear-gradient(135deg, #ff6600, #ff6600);
     color: white;
 }
 
@@ -263,3 +263,4 @@ footer p{
     align-items:center;
     padding:15px 40px;
 }
+

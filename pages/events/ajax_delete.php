@@ -1,24 +1,18 @@
 <?php
 
-include "../../classes/Database.php";
-include "../../classes/Event.php";
+require_once "../../includes/database.php";
+require_once "../../classes/Event.php";
 
-$db = (new Database())->connect();
-$event = new Event($db);
+$event = new Event($conn); // PDO connection
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
 
     $event->id = $_GET['id'];
 
-    if($event->delete()) {
-
+    if ($event->delete()) {
         echo "success";
-
     } else {
-
         echo "error";
     }
-
 }
-
 ?>

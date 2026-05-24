@@ -1,22 +1,27 @@
-<?php
+﻿<?php
 
 include "../../includes/header.php";
-include "../../classes/Database.php";
-include "../../classes/Event.php";
+require_once "../../includes/database.php";
+require_once "../../classes/Event.php";
 
-$db = (new Database())->connect();
-$event = new Event($db);
+$event = new Event($conn);
 
-$msg="";
+$msg = "";
+
+// CHECK ID
+if (!isset($_GET['id'])) {
+    die("Missing event ID");
+}
 
 $event->id = $_GET['id'];
 $data = $event->single();
 
-if(isset($_POST['update'])){
+if (isset($_POST['update'])) {
 
     $image = $data['image'];
 
-    if(!empty($_FILES['image']['name'])){
+    // upload image
+    if (!empty($_FILES['image']['name'])) {
 
         $image = time() . "_" . $_FILES['image']['name'];
 
@@ -29,13 +34,13 @@ if(isset($_POST['update'])){
     $event->title = $_POST['title'];
     $event->description = $_POST['description'];
     $event->event_date = $_POST['event_date'];
-    $event->category = $_POST['category'];
     $event->image = $image;
 
-    if($event->update()){
-        $msg="Event updated successfully!";
+    if ($event->update()) {
+        $msg = "Event updated successfully!";
+    } else {
+        $msg = "Error updating event!";
     }
-
 }
 
 ?>
@@ -48,7 +53,6 @@ if(isset($_POST['update'])){
 <div class="form-card">
 
 <form method="POST" enctype="multipart/form-data">
-
 <input
 type="text"
 name="title"
@@ -70,9 +74,15 @@ required>
 <input
 type="text"
 name="category"
-value="<?= $data['category'] ?>"
-placeholder="Category"
-required>
+<?php
+$data = $event->single();
+if ($data === false) {
+    echo "ID e dërguar: " . $event->id . "<br>";
+    echo "Tabela e kërkuar: " . $event->table . "<br>";
+    echo "Query nuk ktheu asnjë rezultat.";
+    exit;
+}
+?>
 
 <input
 type="file"
@@ -87,6 +97,8 @@ Update Event
 <p style="text-align:center;color:green;margin-top:15px;">
 <?= $msg ?>
 </p>
+
+<?php include "../../includes/footer.php"; ?>
 
 </div>
 

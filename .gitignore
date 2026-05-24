@@ -3,8 +3,6 @@
 .vscode/
 
 # Skedarët e bazës së të dhënave ose konfigurimit që mund të kenë passworde
-config.php
-database.php
 .env
 
 # Folderët e panevojshëm të sistemit

@@ -1,19 +1,25 @@
 <?php
+$root = realpath(__DIR__ . '/../../');
 
-include "../../includes/header.php";
-include "../../classes/Database.php";
-include "../../classes/Event.php";
+// 1. Përfshij header-in (dizajni yt do të mbetet siç është)
+include $root . '/includes/header.php';
 
-$db = (new Database())->connect();
-$event = new Event($db);
+// 2. Përfshij skedarin që krijon lidhjen $conn
+include_once $root . '/includes/database.php'; 
+
+// 3. Përfshij klasën Event
+include_once $root . '/classes/Event.php';
+
+// 4. Kalojmë $conn (variablin e krijuar në database.php) në klasën Event
+// Sigurohu që konstruktori i klasës Event pranon $conn
+$event = new Event($conn); 
 
 $result = $event->read();
-
 ?>
 
 <div class="hero">
     <h1>Event Management</h1>
-<p>Create, update and organize your events easily</p>
+    <p>Create, update and organize your events easily</p>
 </div>
 
 <div class="main-content">
@@ -24,32 +30,36 @@ $result = $event->read();
 
 <div class="event-card" id="row-<?= $row['id'] ?>">
 
-<img src="../../uploads/events/<?= $row['image'] ?>" alt="event">
+<link rel="stylesheet" href="../../assets/css/style.css">
 
-<div class="event-info">
+    <img src="../../uploads/events/<?= htmlspecialchars($row['image']) ?>" alt="event">
 
-<h3><?= $row['title'] ?></h3>
 
-<p><?= $row['description'] ?></p>
+    <div class="event-info">
 
-<p><strong>Date:</strong> <?= $row['event_date'] ?></p>
+        <h3><?= htmlspecialchars($row['title']) ?></h3>
 
-<p><strong>Category:</strong> <?= $row['category'] ?></p>
+        <p><?= htmlspecialchars($row['description']) ?></p>
 
-<div class="event-buttons">
+        <p><strong>Date:</strong> <?= $row['event_date'] ?></p>
 
-<a href="edit.php?id=<?= $row['id'] ?>" class="edit-btn">
-Edit
-</a>
+        <p><strong>Category:</strong> <?= htmlspecialchars($row['category']) ?></p>
 
-<button class="delete-btn"
-onclick="deleteEvent(<?= $row['id'] ?>)">
-Delete
-</button>
 
-</div>
+        <div class="event-buttons">
 
-</div>
+            <a href="edit.php?id=<?= $row['id'] ?>" class="edit-btn">
+                Edit
+            </a>
+
+            <button class="delete-btn"
+                    onclick="deleteEvent(<?= $row['id'] ?>)">
+                Delete
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
@@ -59,6 +69,6 @@ Delete
 
 </div>
 
-<script src="../../assets/js/event.js"></script>
+<script src="/project/assets/js/event.js"></script>
 
 <?php include "../../includes/footer.php"; ?>
