@@ -1,4 +1,5 @@
 ﻿<?php include __DIR__ . '/../includes/header.php'; ?>
+<?php require __DIR__ . '/../includes/db.php'; ?>
 
 <?php
 $message = "";
@@ -9,8 +10,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $event = $_POST["event"];
 
     if ($name && $email && $event) {
-        $message = "🎉 Booking confirmed for $name for $event.";
+
+    try {
+
+        $sql = "INSERT INTO bookings(name, email, event_name)
+                VALUES(:name, :email, :event_name)";
+
+        $stmt = $conn->prepare($sql);
+
+        $stmt->execute([
+            ':name' => htmlspecialchars($name),
+            ':email' => htmlspecialchars($email),
+            ':event_name' => htmlspecialchars($event)
+        ]);
+
+        $message =
+        "🎉 Booking confirmed for $name for $event.";
+
+    } catch(PDOException $e) {
+
+        $message = $e->getMessage();
     }
+}
 }
 ?>
 
@@ -40,5 +61,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 </section>
+
+
+<script>
+
+document
+.getElementById("bookingForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("", {
+
+        method: "POST",
+
+        body: formData
+    })
+
+    .then(response => response.text())
+
+    .then(data => {
+
+        location.reload();
+
+    });
+
+});
+
+</script>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
