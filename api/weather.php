@@ -1,5 +1,4 @@
 <?php 
-
 include __DIR__ . "/../includes/header.php"; 
 ?>
 
@@ -9,7 +8,6 @@ include __DIR__ . "/../includes/header.php";
 <style>
     body { font-family: 'Poppins', sans-serif; background-color: #f4f7f6; }
     
-  
     nav ul { 
         display: flex !important; 
         list-style: none !important; 
@@ -21,10 +19,9 @@ include __DIR__ . "/../includes/header.php";
     }
     nav ul li a { text-decoration: none !important; color: #333; font-weight: 500; }
 
-  
     .weather-container {
         background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-        min-height: 65vh;
+        min-height: 70vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -33,19 +30,17 @@ include __DIR__ . "/../includes/header.php";
     .weather-card {
         background: white;
         padding: 40px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-radius: 25px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         text-align: center;
         width: 100%;
         max-width: 450px;
     }
 
-  
     footer {
         background-color: #0d0d1a !important; 
         color: white !important;
         padding: 60px 0 20px 0 !important;
-        margin-top: 0;
     }
     .footer-container {
         display: flex !important;
@@ -55,32 +50,19 @@ include __DIR__ . "/../includes/header.php";
         flex-wrap: wrap;
     }
     .footer-container div { flex: 1; min-width: 250px; padding: 15px; }
-    .footer-container h3 { font-size: 22px; margin-bottom: 20px; color: white; }
-    .footer-container a { color: #3498db !important; text-decoration: underline !important; }
-    .copyright { 
-        text-align: left; 
-        max-width: 1200px; 
-        margin: 40px auto 0 auto; 
-        padding: 20px 0 0 50px; 
-        border-top: 1px solid #1a1a2e;
-        font-size: 14px;
-    }
+    .footer-container h3 { font-size: 20px; margin-bottom: 15px; color: white; }
+    .footer-container a { color: #3498db !important; text-decoration: none; }
 </style>
 
 <div class="weather-container">
     <?php
- 
-    function fetchWeather($city) {
+    function getLiveWeather($city) {
         $key = "8797f1f51084803099951336c539207e";
         $url = "https://api.openweathermap.org/data/2.5/weather?q=" . urlencode($city) . "&appid=$key&units=metric";
         
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $res = curl_exec($ch);
-        curl_close($ch);
-        
+        $res = @file_get_contents($url);
+        if ($res === FALSE) return null;
+
         $data = json_decode($res, true);
         
         if ($data && $data['cod'] == 200) {
@@ -91,37 +73,34 @@ include __DIR__ . "/../includes/header.php";
                 'city' => $data['name']
             ];
         }
-        
-        return ['temp' => 22, 'desc' => 'Kthjellët', 'icon' => '01d', 'city' => $city];
+        return null;
     }
 
-  
-    $cityInput = (!empty($_GET['city'])) ? $_GET['city'] : "Prishtina";
-    $w = fetchWeather($cityInput);
-    ?>
+    $cityInput = (isset($_GET['city']) && !empty($_GET['city'])) ? $_GET['city'] : "Prishtina";
+    $w = getLiveWeather($cityInput);
 
-    <div class="weather-card">
-        <h2 class="fw-bold mb-1">Moti në <?php echo $w['city']; ?></h2>
-        <p class="text-muted small mb-4">Parashikimi live për eventin tuaj</p>
-        
-        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 120px; height: 120px;">
-            <img src="http://openweathermap.org/img/wn/<?php echo $w['icon']; ?>@4x.png" width="100">
+    if ($w): ?>
+        <div class="weather-card">
+            <h2 class="fw-bold mb-1">Moti në <?php echo $w['city']; ?></h2>
+            <p class="text-muted small mb-4">Parashikimi live për eventin tuaj</p>
+            
+            <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3" style="width: 130px; height: 130px;">
+                <img src="http://openweathermap.org/img/wn/<?php echo $w['icon']; ?>@4x.png" width="110">
+            </div>
+            
+            <h1 class="display-2 fw-bold m-0"><?php echo $w['temp']; ?>°C</h1>
+            <p class="text-uppercase text-muted fw-bold mb-4"><?php echo $w['desc']; ?></p>
+
+            <div class="alert alert-success border-0 shadow-sm mb-4" style="border-radius: 15px;">
+                <i class="fas fa-check-circle me-2"></i> Rezervimi u konfirmua! Email-i u dërgua.
+            </div>
+
+            <a href="../data/all_events.php" class="btn btn-outline-primary btn-sm fw-bold">
+                <i class="fas fa-arrow-left me-1"></i> Kthehu te Eventet
+            </a>
         </div>
-        
-        <h1 class="display-3 fw-bold m-0"><?php echo $w['temp']; ?>°C</h1>
-        <p class="text-uppercase text-muted fw-bold mb-4"><?php echo $w['desc']; ?></p>
-
-        <div class="alert alert-success border-0 shadow-sm" style="border-radius: 12px;">
-            <i class="fas fa-check-circle me-2"></i> Konfirmimi i rezervimit u dërgua!
-        </div>
-
-        <a href="../pages/view_event.php" class="text-decoration-none fw-bold mt-3 d-inline-block">
-            <i class="fas fa-arrow-left me-1"></i> Kthehu te Eventet
-        </a>
-    </div>
-</div>
-
-<?php 
-
-include __DIR__ . "/../includes/footer.php"; 
-?>
+    <?php else: ?>
+        <div class="weather-card border border-danger">
+            <i class="fas fa-exclamation-triangle text-danger display-4 mb-3"></i>
+            <h3 class="fw-bold text-danger">Qyteti nuk u gjet!</h3>
+            <p class="text-muted">
