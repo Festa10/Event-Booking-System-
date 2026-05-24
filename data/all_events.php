@@ -7,10 +7,8 @@ $events = [
     new Event("Stand-up Comedy", "2026-05-20", "Prizren", 10),
     new Event("Gardening Workshop", "2026-04-28", "Prishtina", 12),
     new Event("Art Exhibition", "2026-05-12", "Gjakova", 15),
-    new Event("Film Festival", "2026-08-10", "Ferizaj", 20),
-    new Event("Classic Concert", "2026-05-15", "Tirana", 25)
+    new Event("Film Festival", "2026-08-10", "Ferizaj", 20)
 ];
-
 
 usort($events, function($a, $b) {
     return $a->price <=> $b->price;
@@ -22,29 +20,24 @@ include __DIR__ . "/../includes/header.php";
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <div class="container my-5 text-center">
-    <h1 class="display-4 fw-bold mb-2" style="font-family: sans-serif;">Explore Events</h1>
+    <h1 class="display-4 fw-bold mb-2">Explore Events</h1>
     <p class="text-muted mb-5">Find and book your spot at the best events</p>
 
     <div class="row g-4">
         <?php foreach ($events as $event): ?>
-            <div class="col-md-4 text-center">
-                <div class="card h-100 shadow-sm border-1 p-3" style="border-radius: 15px; border-color: #eee;">
+            <div class="col-md-4">
+                <div class="card h-100 shadow-sm border-0 p-3" style="border-radius: 20px;">
                     <div class="card-body">
-                        <h4 class="fw-bold mb-3"><?php echo $event->name; ?></h4>
+                        <h4 class="fw-bold mb-3"><?php echo $event->title; ?></h4>
                         
-                        <p class="text-muted mb-1 small">
-                            <span class="me-2">📅</span><?php echo $event->date; ?>
-                        </p>
-                        
-                        <p class="text-muted mb-3 small">
-                            <?php echo $event->location; ?>
-                        </p>
+                        <p class="text-muted mb-1 small">📅 <?php echo $event->date; ?></p>
+                        <p class="text-muted mb-3 small">📍 <?php echo $event->location; ?></p>
                         
                         <h3 class="fw-bold text-primary mb-4"><?php echo $event->price; ?>€</h3>
                         
                         <a href="../api/weather.php?city=<?php echo urlencode($event->location); ?>" 
                            class="btn btn-primary w-100 py-2 fw-bold" 
-                           style="border-radius: 8px; background-color: #007bff;">
+                           style="border-radius: 10px;">
                            Book Now
                         </a>
                     </div>
