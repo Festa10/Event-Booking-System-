@@ -10,7 +10,6 @@ include __DIR__ . "/../includes/header.php";
 ?>
 
 <style>
-   
     .weather-page-wrapper {
         background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
         min-height: 85vh;
@@ -58,7 +57,7 @@ include __DIR__ . "/../includes/header.php";
 
 <div class="weather-page-wrapper">
     <?php
-
+   
     function getEventWeather($city) {
         $apiKey = "8797f1f51084803099951336c539207e"; 
         $url = "https://api.openweathermap.org/data/2.5/weather?q=" . urlencode($city) . "&appid=" . $apiKey . "&units=metric";
@@ -80,13 +79,12 @@ include __DIR__ . "/../includes/header.php";
                     'icon' => $data['weather'][0]['icon']
                 ];
             } else {
-               
-                return ['temp' => 22, 'desc' => 'Kthjellët', 'icon' => '01d'];
+                return ['temp' => 22, 'desc' => 'Kthjellët (Demo)', 'icon' => '01d'];
             }
         } catch (Exception $e) { return null; }
     }
 
-  
+   
     $city = isset($_GET['city']) ? htmlspecialchars($_GET['city']) : "Prishtina";
     
     try {
@@ -95,7 +93,7 @@ include __DIR__ . "/../includes/header.php";
         if ($weather) {
             echo "<div class='weather-card'>";
             echo "<h2 style='margin-bottom: 5px; color: #333;'>Moti në $city</h2>";
-            echo "<p style='font-size: 14px; color: #999; margin-bottom: 20px;'>Parashikimi për lokacionin e eventit</p>";
+            echo "<p style='font-size: 14px; color: #999; margin-bottom: 20px;'>Parashikimi live për lokacionin e eventit</p>";
             
             echo "<div class='weather-icon-bg'>";
             echo "<img src='http://openweathermap.org/img/wn/" . $weather['icon'] . "@4x.png' width='110'>";
@@ -104,7 +102,8 @@ include __DIR__ . "/../includes/header.php";
             echo "<p class='temp-large'>" . round($weather['temp']) . "°C</p>";
             echo "<p class='condition-text'>" . $weather['desc'] . "</p>";
             
-            echo "<a href='/project/pages/view_event.php' class='btn-back'>← Kthehu te Eventet</a>";
+            echo "<a href='../pages/view_event.php' class='btn-back'>← Kthehu te Eventet</a>";
+            
             echo "</div>";
         }
     } catch (Exception $e) {
@@ -114,6 +113,6 @@ include __DIR__ . "/../includes/header.php";
 </div>
 
 <?php 
-// 3. FOOTER (Integrimi me koleget)
+
 include __DIR__ . "/../includes/footer.php"; 
 ?>
