@@ -68,7 +68,6 @@ include __DIR__ . "/../includes/header.php";
         echo "<h1 style='font-size: 45px; margin: 0; color: #2c3e50;'>" . round($weather['temp']) . "°C</h1>";
         echo "<p style='text-transform: capitalize; font-weight: 600; color: #34495e;'>" . $weather['desc'] . "</p>";
         echo "<hr style='border: 0; border-top: 1px solid #eee; margin: 20px 0;'>";
-        echo "<p style='font-size: 12px; color: #999;'>Shërbimi i motit i integruar nga Personi 4</p>";
         echo "</div>";
     }
     ?>
