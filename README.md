@@ -1,45 +1,149 @@
 # Event Booking System
 
 ## Përshkrimi
-Ky projekt është një aplikacion web i zhvilluar në PHP për menaxhimin dhe rezervimin e eventeve. Sistemi përfshin autentikim të përdoruesve, role (admin/user), shfaqje të eventeve dhe funksionalitete shtesë si validimi i të dhënave dhe cookies.
+Ky projekt është një aplikacion web i zhvilluar në PHP për menaxhimin dhe rezervimin e eventeve. Sistemi lejon përdoruesit të shohin evente, të bëjnë rezervime dhe të përdorin funksione të ndryshme si autentikimi, kontrolli i roleve dhe menaxhimi i të dhënave përmes databazës.
 
 ## Funksionalitetet
-	• Shfaqja e eventeve (të dhëna dummy) 
-	• Faqja e detajeve të eventit 
-	• Sistemi i rezervimit (Booking) 
-	• Login / Logout i përdoruesve 
-	• Role: admin dhe user 
-	• Kontroll i aksesit sipas roleve 
-	• Përdorimi i OOP (klasa Event dhe PremiumEvent) 
-	• Sortim i eventeve 
-	• Contact form me validim 
-	• Validim me RegEx (email dhe telefon) 
-	• Përdorimi i cookies për personalizim 
-	• Menaxhimi i sesioneve (sessions) 
 
-## Struktura e projektit
-	• includes/ → header, navbar, footer, auth, cookies, users, validation
-	• pages/ → faqet kryesore (about, event, booking, login, contact, etj.) 
-	• classes/ → klasat PHP (Event, PremiumEvent) 
-	• assets/ → CSS dhe imazhe 
-  • data/ → all_events
-	• index.php → faqja kryesore 
+### Faza I
+- Shfaqja e eventeve
+- Faqja e detajeve të eventit
+- Sistemi i rezervimit (Booking)
+- Login / Logout
+- Role: Admin dhe User
+- Kontroll i aksesit sipas roleve
+- Përdorimi i OOP (Event dhe PremiumEvent)
+- Sortimi i eventeve
+- Contact form me validim
+- Validim me RegEx
+- Përdorimi i cookies
+- Menaxhimi i sesioneve
 
-## Kredencialet
-Admin:
-username: admin
-password: admin123
-User:
-username: user
-password: user123
+### Faza II
+- Integrimi i databazës me PHP PDO
+- CRUD për evente (Create, Read, Update, Delete)
+- Upload i fotografive të eventeve
+- Sistemi i rezervimeve me databazë
+- AJAX për veprime dinamike
+- Try/Catch për trajtimin e gabimeve
+- Login/Register me databazë
+- Funksione sigurie
+- Integrimi i API (Weather API)
+- Dërgimi i email-eve
+- Error handling
 
-## Ekzekutimi
-	1. Vendos projektin në: C:\xampp\htdocs\project
-	2. Starto Apache në XAMPP
-	3. Hap në browser:  http://localhost/project/
+## Struktura e Projektit
 
- ## Anëtarët e projektit
-  • Eliona Muja
-  • Festa Berisha
-  • Fiona Grabovci
-  • Jeta Podrimcaku
+```text
+Event-Booking-System
+│
+├── api
+│   └── weather.php
+│
+├── assets
+│   ├── css
+│   │   └── style.css
+│   │
+│   ├── images
+│   │   ├── art.jpg
+│   │   ├── charity.jpg
+│   │   ├── fashion.jpg
+│   │   ├── food.jpg
+│   │   ├── gaming.jpg
+│   │   ├── music.jpg
+│   │   ├── photography.jpg
+│   │   ├── startup.jpg
+│   │   └── tech.jpg
+│   │
+│   └── js
+│       └── event.js
+│
+├── classes
+│   ├── Event.php
+│   └── PremiumEvent.php
+│
+├── data
+│   └── all_events.php
+│
+├── includes
+│   ├── auth.php
+│   ├── cookies.php
+│   ├── database.php
+│   ├── email_functions.php
+│   ├── error_handler.php
+│   ├── footer.php
+│   ├── header.php
+│   ├── nav.php
+│   ├── users.php
+│   └── validation.php
+│
+├── pages
+│   ├── events
+│   │   ├── ajax_delete.php
+│   │   ├── create.php
+│   │   ├── delete.php
+│   │   ├── edit.php
+│   │   └── index.php
+│   │
+│   ├── about.php
+│   ├── admin.php
+│   ├── booking.php
+│   ├── confirm.php
+│   ├── contact.php
+│   ├── dashboard.php
+│   ├── login.php
+│   ├── logout.php
+│   ├── register.php
+│   └── view_event.php
+│
+├── uploads
+│   └── events
+│
+├── .gitignore
+├── README.md
+└── index.php
+```
+
+## Databaza
+
+**Emri i databazës:**  
+eventbooking
+
+**Tabelat:**
+- users
+- events
+- bookings
+
+**Porti i MySQL:**  
+3307
+
+## Ekzekutimi i Projektit
+
+1. Vendos projektin në:
+
+```text
+C:\xampp\htdocs\project
+```
+
+2. Starto:
+- Apache
+- MySQL
+
+3. Importo databazën:
+
+```text
+eventbooking.sql
+```
+
+4. Hap projektin në browser:
+
+```text
+http://localhost:8080/project/
+```
+
+## Anëtarët e Projektit
+
+- Eliona Muja
+- Festa Berisha
+- Fiona Grabovci
+- Jeta Podrimcaku
