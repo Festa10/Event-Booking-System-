@@ -17,16 +17,17 @@ class Event {
     public $image;
 
     public function __construct($db = null, $t = null, $d = null, $l = null, $p = null) {
-
+    // Nëse $db nuk është objekt PDO (lidhje), atëherë supozojmë se është $title
+    if (!($db instanceof PDO)) {
+        $this->title = $db;  // Këtu $db në fakt është titulli
+        $this->date = $t;    // $t është data
+        $this->location = $d;// $d është lokacioni
+        $this->price = $l;   // $l është çmimi
+    } else {
+        // Përndryshe, është lidhja e rregullt e databazës
         $this->conn = $db;
-
-        if($t !== null) {
-            $this->title = $t;
-            $this->date = $d;
-            $this->location = $l;
-            $this->price = $p;
-        }
     }
+}
 
     function display() {
         return "
