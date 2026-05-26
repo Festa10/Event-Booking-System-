@@ -1,17 +1,24 @@
 <?php
-// Kjo është mënyra e saktë për t'u lidhur me PDO
-// që klasa jote Event.php të mos thotë më "Fatal Error"
+
 $host = "127.0.0.1";
-$db_name = "eventbooking";
+$dbname = "event_booking_system";
 $username = "root";
 $password = "";
 $port = "3307";
 
 try {
-    $conn = new PDO("mysql:host=$host;port=$port;dbname=$db_name;charset=utf8mb4", $username, $password);
-    // Kjo ndihmon që PDO të raportojë gabimet siç duhet
+
+    $conn = new PDO(
+        "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4",
+        $username,
+        $password
+    );
+
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
 } catch(PDOException $e) {
+
     die("Connection failed: " . $e->getMessage());
 }
+
 ?>

@@ -1,15 +1,36 @@
 ﻿<?php include __DIR__ . '/../includes/header.php'; ?>
+<?php require __DIR__ . '/../includes/db.php'; ?>
 
 <?php
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
     $name = $_POST["name"];
     $email = $_POST["email"];
     $event = $_POST["event"];
 
     if ($name && $email && $event) {
-        $message = "🎉 Booking confirmed for $name for $event.";
+
+        try {
+
+            $sql = "INSERT INTO bookings(name, email, event_name)
+                    VALUES(:name, :email, :event_name)";
+
+            $stmt = $conn->prepare($sql);
+
+            $stmt->execute([
+                ':name' => htmlspecialchars($name),
+                ':email' => htmlspecialchars($email),
+                ':event_name' => htmlspecialchars($event)
+            ]);
+
+            $message = "🎉 Booking confirmed for $name for $event.";
+
+        } catch(PDOException $e) {
+
+            $message = $e->getMessage();
+        }
     }
 }
 ?>
@@ -18,10 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="booking-box">
 
-       <h2 style="text-align: center;">Book Event</h2>
+        <h2 style="text-align:center;">Book Event</h2>
 
-
-        <form method="POST">
+        <form id="bookingForm" method="POST">
 
             <label>Full Name</label>
             <input type="text" name="name" placeholder="Enter your name" required>
@@ -32,7 +52,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label>Event</label>
             <input type="text" name="event" placeholder="Enter event you want to book" required>
 
-            <button type="submit" class="btn-book">Book Now</button>
+            <button type="submit" class="btn-book">
+                Book Now
+            </button>
 
         </form>
 
@@ -40,8 +62,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     </div>
 
-    <?php include __DIR__ . '/../includes/footer.php'; ?>
-
-
 </section>
 
+<script>
+document.getElementById("bookingForm")
+.addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("",{
+        method:"POST",
+        body:formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        location.reload();
+    });
+
+});
+</script>
+
+<?php include __DIR__ . '/../includes/footer.php'; ?>
