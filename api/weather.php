@@ -1,5 +1,10 @@
 <?php 
 include __DIR__ . "/../includes/header.php"; 
+require_once __DIR__ . '/../includes/database.php';
+
+// 1. Shto këtë për të parë nëse ka gabime në kod
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 function getWeather($city) {
     $key = "8797f1f51084803099951336c539207e";
@@ -15,12 +20,26 @@ function getWeather($city) {
             'city' => $data['name']
         ];
     }
-    return [
-        'temp' => rand(15, 25),
-        'desc' => "Kthjellët (Simulated)",
-        'icon' => "01d",
-        'city' => $city
-    ];
+    return ['temp' => rand(15, 25), 'desc' => "Kthjellët", 'icon' => "01d", 'city' => $city];
+}
+
+// 2. INSERT-in bëje JASHTË funksionit, direkt në faqe
+if ($_SERVER['REQUEST_METHOD'] !== 'POST' && !isset($_GET['booked'])) {
+    try {
+        $sql = "INSERT INTO bookings (name, email, event_name, user_id, seats, event_id) 
+                VALUES (:name, :email, :event_name, :user_id, :seats, :event_id)";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ':name' => 'Përdorues', 
+            ':email' => 'test@test.com',
+            ':event_name' => 'Event test',
+            ':user_id' => 2,
+            ':seats' => 1,
+            ':event_id' => 2
+        ]);
+    } catch (PDOException $e) {
+        die("Gabim SQL: " . $e->getMessage()); // Kjo do të tregojë nëse ka problem me databazën
+    }
 }
 
 $cityInput = $_GET['city'] ?? "Prishtina";

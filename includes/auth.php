@@ -8,37 +8,30 @@ require_once "database.php";
     LOGIN FUNCTION (DB + SECURITY)
 */
 function login($email, $password) {
-    global $conn;
+    global $conn; // $conn duhet të jetë objekti PDO
 
-    $stmt = $conn->prepare("SELECT id, name, email, password, role FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
+    // Përdorim sintaksën PDO për të përgatitur query-n
+    $stmt = $conn->prepare("SELECT id, name, email, password, role FROM users WHERE email = :email");
+    $stmt->execute([':email' => $email]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    $stmt->store_result();
+    // Kontrollojmë nëse përdoruesi ekziston dhe passwordi është korrekt
+    if ($user && password_verify($password, $user['password'])) {
+        
+        session_regenerate_id(true);
 
-    if ($stmt->num_rows === 1) {
+        $_SESSION["user"] = [
+            "id" => $user['id'],
+            "name" => htmlspecialchars($user['name']),
+            "email" => htmlspecialchars($user['email']),
+            "role" => $user['role']
+        ];
 
-        $stmt->bind_result($id, $name, $emailDB, $passwordDB, $role);
-        $stmt->fetch();
-
-        if (password_verify($password, $passwordDB)) {
-
-            session_regenerate_id(true);
-
-            $_SESSION["user"] = [
-                "id" => $id,
-                "name" => htmlspecialchars($name),
-                "email" => htmlspecialchars($emailDB),
-                "role" => $role
-            ];
-
-            return true;
-        }
+        return true;
     }
 
     return false;
 }
-
 /*
     CHECK IF LOGGED IN
 */

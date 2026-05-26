@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/../classes/Event.php';
 include __DIR__ . "/../includes/header.php"; 
+require __DIR__ . '/../includes/database.php';
+
 
 $events = [
     new Event("Classic Concert", "2026-05-15", "Prishtina", 25),
@@ -15,10 +17,15 @@ $events = [
     new Event("Gardening Workshop", "2026-04-28", "Podujeva", 12)
 ];
 ?>
+<div class="container-fluid p-0 mb-5" style="background-color: #ff6600 !important; color: white;">
+    <div class="py-5 text-center">
+        <h1 class="display-4 fw-semibold">Explore All Events</h1>
+        <p class="lead">Discover and book amazing events</p>
+    </div>
+</div>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <div class="container my-5 text-center">
-    <h1 class="fw-bold mb-5">Explore All Events</h1>
     <div class="row g-4">
         <?php foreach ($events as $event): ?>
             <div class="col-md-4">
@@ -30,7 +37,7 @@ $events = [
                         <p class="text-muted mb-3">📍 <strong>Vendi:</strong> <?php echo $event->location; ?></p>
                         <h3 class="text-primary fw-bold mb-3"><?php echo $event->price; ?>€</h3>
                         
-                        <a href="../api/weather.php?city=<?php echo urlencode($event->location); ?>" 
+                        <a href="../api/weather.php?city=<?php echo urlencode($event->location); ?>&event_id=<?php echo $event->id; ?>" 
                            class="btn btn-primary w-100 fw-bold py-2" style="border-radius: 10px;">
                            Check Weather & Book
                         </a>

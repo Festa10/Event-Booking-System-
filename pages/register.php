@@ -133,7 +133,7 @@ footer {
     padding: 20px;
     background: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 60px; 
+    margin-bottom: 0px; 
 }
 
 .box {
@@ -171,42 +171,36 @@ input { border-radius: 10px !important; }
     
 </nav>
 
-<div class="page-center">
-
-<div class="card p-4">
-
-    <h4 class="text-center mb-3">Register</h4>
-
-    <form method="POST">
-
-        <input type="text" name="username" class="form-control mb-3" placeholder="Username">
-
-        <input type="email" name="email" class="form-control mb-3" placeholder="Email">
-
-         <input type="password" name="password" class="form-control mb-3" placeholder="Password">
-
-        <?php if ($error): ?>
-            <div class="alert alert-danger text-center"><?= $error ?></div>
-        <?php endif; ?>
-
-        <?php if ($success): ?>
-            <div class="alert alert-success text-center"><?= $success ?></div>
-        <?php endif; ?>
-
-        <button class="btn btn-primary w-100">Create Account</button>
-
-    </form>
-
-    <div class="text-center mt-3">
-        <a href="login.php">Already have an account? Login here</a>
+<div class="container-fluid p-0" style="background-color: #ff6600 !important; color: white;">
+    <div class="py-5 text-center">
+        <h1 class="display-4 fw-semibold">Create Your Account</h1>
+        <p class="lead">Join us to start booking amazing events</p>
     </div>
-
 </div>
 
+<div class="page-center">
+    <div class="card p-4">
+        <h4 class="text-center mb-3">Register</h4>
+        <form method="POST">
+            <input type="text" name="username" class="form-control mb-3" placeholder="Username">
+            <input type="email" name="email" class="form-control mb-3" placeholder="Email">
+            <input type="password" name="password" class="form-control mb-3" placeholder="Password">
+
+            <?php if ($error): ?>
+                <div class="alert alert-danger text-center"><?= $error ?></div>
+            <?php endif; ?>
+
+            <?php if ($success): ?>
+                <div class="alert alert-success text-center"><?= $success ?></div>
+            <?php endif; ?>
+
+            <button class="btn btn-primary w-100">Create Account</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="login.php">Already have an account? Login here</a>
+        </div>
+    </div>
 </div>
 
 <?php include("../includes/footer.php"); ?>
-
-</body>
-</html>
-

@@ -1,87 +1,81 @@
-﻿<?php include __DIR__ . '/../includes/header.php'; ?>
-<?php require __DIR__ . '/../includes/db.php'; ?>
+﻿<?php 
+include __DIR__ . '/../includes/header.php'; 
+require __DIR__ . '/../includes/database.php'; 
 
-<?php
 $message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"] ?? '';
+    $email = $_POST["email"] ?? '';
+    $event = $_POST["event"] ?? '';
 
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $event = $_POST["event"];
-
-    if ($name && $email && $event) {
-
+    if (!empty($name) && !empty($email) && !empty($event)) {
         try {
-
-            $sql = "INSERT INTO bookings(name, email, event_name)
-                    VALUES(:name, :email, :event_name)";
-
+            $sql = "INSERT INTO bookings (name, email, event_name) VALUES (:name, :email, :event_name)";
             $stmt = $conn->prepare($sql);
-
             $stmt->execute([
-                ':name' => htmlspecialchars($name),
-                ':email' => htmlspecialchars($email),
-                ':event_name' => htmlspecialchars($event)
+                ':name' => $name,
+                ':email' => $email,
+                ':event_name' => $event
             ]);
-
-            $message = "🎉 Booking confirmed for $name for $event.";
-
+            $message = "success";
         } catch(PDOException $e) {
-
-            $message = $e->getMessage();
+            $message = "Gabim: " . $e->getMessage();
         }
     }
 }
 ?>
 
-<section class="booking-page">
+<?php if ($message == "success"): ?>
+    <script>alert("Booking confirmed!"); window.location.href = 'booking.php';</script>
+<?php elseif (!empty($message)): ?>
+    <script>alert("<?= $message ?>");</script>
+<?php endif; ?>
 
-    <div class="booking-box">
+<style>
+    .full-width-banner {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        background-color: #ff6600 !important;
+        color: white;
+        padding: 50px 0;
+        margin-bottom: 50px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+</style>
 
-        <h2 style="text-align:center;">Book Event</h2>
+<div class="full-width-banner">
+    <h1 class="display-3 fw-semibold">Book Your Event</h1>
+    <p class="lead">Fill in the details to secure your spot</p>
+</div>
 
-        <form id="bookingForm" method="POST">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow p-4" style="border-radius: 15px;">
+                <form method="POST" action="booking.php">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" name="name" class="form-control mb-3" placeholder="Enter your name" required>
 
-            <label>Full Name</label>
-            <input type="text" name="name" placeholder="Enter your name" required>
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control mb-3" placeholder="Enter your email" required>
 
-            <label>Email</label>
-            <input type="email" name="email" placeholder="Enter your email" required>
+                    <label class="form-label">Event</label>
+                    <input type="text" name="event" class="form-control mb-3" placeholder="Enter event name" required>
 
-            <label>Event</label>
-            <input type="text" name="event" placeholder="Enter event you want to book" required>
-
-            <button type="submit" class="btn-book">
-                Book Now
-            </button>
-
-        </form>
-
-        <p class="message"><?php echo $message; ?></p>
-
+                    <button type="submit" class="btn btn-primary w-100">Book Now</button>
+                </form>
+            </div>
+        </div>
     </div>
-
-</section>
-
-<script>
-document.getElementById("bookingForm")
-.addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    let formData = new FormData(this);
-
-    fetch("",{
-        method:"POST",
-        body:formData
-    })
-    .then(response => response.text())
-    .then(data => {
-        location.reload();
-    });
-
-});
-</script>
+</div>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>

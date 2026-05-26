@@ -41,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,7 +122,7 @@ footer {
     padding: 20px;
     background: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin-bottom: 60px; 
+    margin-bottom: 0px; 
 }
 
 .box {
@@ -161,6 +160,13 @@ input { border-radius: 10px !important; }
     
 </nav>
 
+<div class="container-fluid p-0 mb-5" style="background-color: #ff6600 !important; color: white;">
+    <div class="py-5 text-center">
+        <h1 class="display-4 fw-semibold">Log In To Your Account</h1>
+        <p class="lead">Access your events and bookings</p>
+    </div>
+</div>
+
 <div class="page-center">
 
 <div class="box">
@@ -191,4 +197,3 @@ input { border-radius: 10px !important; }
 
 </body>
 </html>
-
