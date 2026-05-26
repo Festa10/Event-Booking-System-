@@ -24,24 +24,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     else {
 
-        // 🔥 CHECK IF EMAIL EXISTS (prepared statement)
-        $check = $conn->prepare("SELECT id FROM users WHERE email = ?");
-        $check->bind_param("s", $email);
-        $check->execute();
-        $check->store_result();
-
-        if ($check->num_rows > 0) {
+        // 🔥 CHECK IF EMAIL EXISTS (Përdorim PDO: execute me array)
+        $stmtCheck = $conn->prepare("SELECT id FROM users WHERE email = :email");
+        $stmtCheck->execute([':email' => $email]);
+        
+        if ($stmtCheck->rowCount() > 0) {
             $error = "Email already exists!";
         } else {
 
-            // 🔥 HASH PASSWORD (security standard)
+            // 🔥 HASH PASSWORD
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-            // 🔥 INSERT USER
-            $stmt = $conn->prepare("INSERT INTO users(name, email, password, role) VALUES(?, ?, ?, 'user')");
-            $stmt->bind_param("sss", $username, $email, $hashedPassword);
-
-            if ($stmt->execute()) {
+            // 🔥 INSERT USER (Përdorim PDO: execute me array)
+            $sql = "INSERT INTO users (name, email, password, role) VALUES (:name, :email, :password, 'user')";
+            $stmt = $conn->prepare($sql);
+            
+            if ($stmt->execute([
+                ':name' => $username, 
+                ':email' => $email, 
+                ':password' => $hashedPassword
+            ])) {
                 $success = "Account created successfully! You can now log in.";
             } else {
                 $error = "Something went wrong!";

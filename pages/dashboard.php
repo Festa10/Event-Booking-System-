@@ -1,7 +1,15 @@
 <?php
 require_once "../includes/auth.php";
+require_once "../includes/database.php"; 
 requireLogin();
 $user = getUser();
+
+// Merr numrat realë nga databaza
+$stmtE = $conn->query("SELECT COUNT(*) FROM events");
+$eventCount = $stmtE->fetchColumn();
+
+$stmtB = $conn->query("SELECT COUNT(*) FROM bookings");
+$bookingCount = $stmtB->fetchColumn();
 ?>
 <!DOCTYPE html>
 <html lang="sq">
@@ -13,11 +21,7 @@ $user = getUser();
 
 <link rel="stylesheet" href="/event-booking-system/assets/css/style.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-
-
 
 <style>
 html, body {
@@ -95,22 +99,16 @@ footer {
 <body>
 
 <nav class="navbar">
-<a href="/project/#top">🏠 Home</a>
-
-<a href="/project/pages/view_event.php">📅 Events</a>
-
-<a href="/project/pages/booking.php">🎟 Booking</a>
-
-<a href="/project/pages/contact.php">ℹ️ About</a>
-
-<a href="/project/pages/login.php">🔐 Login</a>
-
-<a href="/project/pages/register.php">📝 Register</a>
-
-<a href="/project/pages/events/index.php">⚙️ Manage Events</a>
-
-<a href="/project/pages/events/create.php">➕ Create Event</a>
-    
+    <a href="/project/#top">🏠 Home</a>
+    <a href="/project/pages/view_event.php">📅 Events</a>
+    <a href="/project/pages/booking.php">🎟 Booking</a>
+    <a href="/project/pages/contact.php">ℹ️ About</a>
+    <a href="/project/pages/login.php">🔐 Login</a>
+    <a href="/project/pages/register.php">📝 Register</a>
+    <?php if (getRole() === 'admin'): ?>
+        <a href="/project/pages/events/index.php">⚙️ Manage Events</a>
+        <a href="/project/pages/events/create.php">➕ Create Event</a>
+    <?php endif; ?>
 </nav>
 
 <div class="container py-4">
@@ -132,7 +130,7 @@ footer {
             <div class="card-box text-center">
                 <div class="icon">📅</div>
                 <h6 class="mt-2 text-muted">Events</h6>
-                <div class="num">10</div>
+                <div class="num"><?php echo $eventCount; ?></div>
             </div>
         </div>
 
@@ -140,7 +138,7 @@ footer {
             <div class="card-box text-center">
                 <div class="icon">🎫</div>
                 <h6 class="mt-2 text-muted">Reservations</h6>
-                <div class="num">3</div>
+                <div class="num"><?php echo $bookingCount; ?></div>
             </div>
         </div>
 
@@ -155,7 +153,6 @@ footer {
 
     <div class="mt-4">
         <h5 class="mb-3">Actions</h5>
-
         <div class="row g-3">
             <div class="col-md-6">
                 <a href="view_event.php" class="text-decoration-none">
@@ -170,7 +167,6 @@ footer {
                     </div>
                 </a>
             </div>
-
             <div class="col-md-6">
                 <div class="card-box p-4 h-100" style="opacity:0.6;">
                     <div class="d-flex justify-content-between align-items-center">
@@ -184,11 +180,9 @@ footer {
             </div>
         </div>
     </div>
-
 </div>
 
 <?php include("../includes/footer.php"); ?>
 
 </body>
 </html>
-
