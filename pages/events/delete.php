@@ -4,7 +4,7 @@ include "../../includes/database.php";
 require_once "../../classes/Event.php";
 require_once "../../includes/auth.php";
 
-requireRole("admin"); // 🔐 vetëm admin
+requireRole(["admin"]);
 
 $event = new Event($conn);
 

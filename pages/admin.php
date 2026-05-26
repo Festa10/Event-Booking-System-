@@ -3,14 +3,19 @@ require_once "../includes/auth.php";
 require_once "../includes/database.php";
 
 // PROTECT ADMIN PAGE
-requireRole("admin");
+requireRole(["admin"]);
 
 $user = getUser();
 
 // STATS FROM DATABASE
-$events = $conn->query("SELECT COUNT(*) AS total FROM events")->fetch_assoc()['total'];
-$users = $conn->query("SELECT COUNT(*) AS total FROM users")->fetch_assoc()['total'];
-$bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")->fetch_assoc()['total'];
+$events = $conn->query("SELECT COUNT(*) AS total FROM events")
+               ->fetch(PDO::FETCH_ASSOC)['total'];
+
+$users = $conn->query("SELECT COUNT(*) AS total FROM users")
+              ->fetch(PDO::FETCH_ASSOC)['total'];
+
+$bookings = $conn->query("SELECT COUNT(*) AS total FROM bookings")
+                 ->fetch(PDO::FETCH_ASSOC)['total'];
 ?>
 
 <!DOCTYPE html>

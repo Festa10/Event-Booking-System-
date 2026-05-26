@@ -61,7 +61,7 @@ function sendBookingConfirmation($userEmail, $userName, $eventName, $eventDate) 
     </html>";
 
   
-    return true; 
+    return mail($userEmail, $subject, $message, $headers);
 }
 
 
