@@ -4,34 +4,37 @@
 Ky projekt është një aplikacion web i zhvilluar në PHP për menaxhimin dhe rezervimin e eventeve. Sistemi lejon përdoruesit të shohin evente, të bëjnë rezervime dhe të përdorin funksione të ndryshme si autentikimi, kontrolli i roleve dhe menaxhimi i të dhënave përmes databazës.
 
 ## Funksionalitetet
-Faza I
-Shfaqja e eventeve
-Faqja e detajeve të eventit
-Sistemi i rezervimit (Booking)
-Login / Logout
-Role: Admin dhe User
-Kontroll i aksesit sipas roleve
-Përdorimi i OOP (Event dhe PremiumEvent)
-Sortimi i eventeve
-Contact form me validim
-Validim me RegEx
-Përdorimi i cookies
-Menaxhimi i sesioneve
 
-Faza II
-Integrimi i databazës me PHP PDO
-CRUD për evente (Create, Read, Update, Delete)
-Upload i fotografive të eventeve
-Sistemi i rezervimeve me databazë
-AJAX për veprime dinamike
-Try/Catch për trajtimin e gabimeve
-Login/Register me databazë
-Funksione sigurie
-Integrimi i API (Weather API)
-Dërgimi i email-eve
-Error handling
+### Faza I
+- Shfaqja e eventeve
+- Faqja e detajeve të eventit
+- Sistemi i rezervimit (Booking)
+- Login / Logout
+- Role: Admin dhe User
+- Kontroll i aksesit sipas roleve
+- Përdorimi i OOP (Event dhe PremiumEvent)
+- Sortimi i eventeve
+- Contact form me validim
+- Validim me RegEx
+- Përdorimi i cookies
+- Menaxhimi i sesioneve
 
-## Struktura e projektit
+### Faza II
+- Integrimi i databazës me PHP PDO
+- CRUD për evente (Create, Read, Update, Delete)
+- Upload i fotografive të eventeve
+- Sistemi i rezervimeve me databazë
+- AJAX për veprime dinamike
+- Try/Catch për trajtimin e gabimeve
+- Login/Register me databazë
+- Funksione sigurie
+- Integrimi i API (Weather API)
+- Dërgimi i email-eve
+- Error handling
+
+## Struktura e Projektit
+
+```text
 Event-Booking-System
 │
 ├── api
@@ -95,36 +98,52 @@ Event-Booking-System
 │
 ├── uploads
 │   └── events
-│       ├── 1779566191_tech.jpg
-│       ├── 1779566716_music.jpg
-│       ├── 1779567074_food.jpg
-│       └── 1779650110_art.jpg
 │
 ├── .gitignore
 ├── README.md
 └── index.php
+```
 
 ## Databaza
-Emri i databazës: eventbooking
-Tabelat:
-users
-events
-bookings
-Porti i MySQL: 3307
+
+**Emri i databazës:**  
+eventbooking
+
+**Tabelat:**
+- users
+- events
+- bookings
+
+**Porti i MySQL:**  
+3307
 
 ## Ekzekutimi i Projektit
-Vendos projektin në:
-C:\xampp\htdocs\project
-Starto:
-Apache
-MySQL
-Importo databazën:
-eventbooking.sql
-Hap projektin në browser:
-http://localhost:8080/project/
 
- ## Anëtarët e projektit
-  • Eliona Muja
-  • Festa Berisha
-  • Fiona Grabovci
-  • Jeta Podrimcaku
+1. Vendos projektin në:
+
+```text
+C:\xampp\htdocs\project
+```
+
+2. Starto:
+- Apache
+- MySQL
+
+3. Importo databazën:
+
+```text
+eventbooking.sql
+```
+
+4. Hap projektin në browser:
+
+```text
+http://localhost:8080/project/
+```
+
+## Anëtarët e Projektit
+
+- Eliona Muja
+- Festa Berisha
+- Fiona Grabovci
+- Jeta Podrimcaku
