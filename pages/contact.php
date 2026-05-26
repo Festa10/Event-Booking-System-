@@ -39,9 +39,6 @@ $formData = ['name' => $saved['name'], 'email' => $saved['email'], 'phone' => $s
 }
 }
 ?>
-<!DOCTYPE html>
-<html lang="sq">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kontakto – Projekti Web</title>
@@ -49,8 +46,7 @@ $formData = ['name' => $saved['name'], 'email' => $saved['email'], 'phone' => $s
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+
 
-</style>
-</head>
+
 <body>
 <header class="page-header">
 <p class="eyebrow">Na kontaktoni</p>
@@ -140,7 +136,7 @@ DËRGONI MESAZHIN ->
 <div class="cookie-banner" id="cookieBanner">
 <p>
 <strong>Ky faqe përdor cookies.</strong>
-Ruajmë emrin, email-in dhe telefonin tuaj për t'i parapërgatitur formularët e ardhshë
+Ruajmë emrin, email-in dhe telefonin tuaj për t'i parapërgatitur formularët e ardhshëm
 </p>
 <form method="POST" action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>">
 <button type="submit" name="accept_cookies" class="btn-cookie">
