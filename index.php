@@ -81,7 +81,6 @@
         <img src="assets/images/charity.jpg" alt="Charity Event">
     </div>
 
-    <!-- 🔥 EVENTI I SHTUAR -->
 
     <div class="event">
         <div class="event-content">

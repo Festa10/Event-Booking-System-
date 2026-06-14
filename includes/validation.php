@@ -2,11 +2,11 @@
 
 // Validate email with RegEx
 function validateEmail(string $email): bool {
-return (bool) preg_match('/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/', trim($em
+return (bool) preg_match('/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/', $email);
 }
 function validatePhone(string $phone): bool {
 $phone = trim($phone);
-return (bool) preg_match('/^(\+?3836[789]\d{6}|04[3-9]\d{6}|\+?[1-9]\d{7,14})$/', preg_re
+return (bool) preg_match('/^(\+?3836[789]\d{6}|04[3-9]\d{6}|\+?[1-9]\d{7,14})$/', $phone);
 }
 
 function sanitizeInput(string $input): string {

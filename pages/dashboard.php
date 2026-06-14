@@ -1,0 +1,188 @@
+<?php
+require_once "../includes/auth.php";
+require_once "../includes/database.php"; 
+requireLogin();
+$user = getUser();
+
+// Merr numrat realë nga databaza
+$stmtE = $conn->query("SELECT COUNT(*) FROM events");
+$eventCount = $stmtE->fetchColumn();
+
+$stmtB = $conn->query("SELECT COUNT(*) FROM bookings");
+$bookingCount = $stmtB->fetchColumn();
+?>
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>EventHub - Dashboard</title>
+
+<link rel="stylesheet" href="/event-booking-system/assets/css/style.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Poppins', Arial, sans-serif;
+    background: #f8fafc;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.topbar {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.welcome {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.card-box {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    transition: 0.2s;
+    text-align: center;
+}
+
+.card-box:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    margin-top: auto; 
+    background: #0f172a;
+    color: #cbd5e1;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+}
+
+.footer-section {
+    flex: 1;
+    padding: 0 15px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    background-color: #161625;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+    <a href="/project/#top">🏠 Home</a>
+    <a href="/project/pages/view_event.php">📅 Events</a>
+    <a href="/project/pages/booking.php">🎟 Booking</a>
+    <a href="/project/pages/contact.php">ℹ️ About</a>
+    <a href="/project/pages/login.php">🔐 Login</a>
+    <a href="/project/pages/register.php">📝 Register</a>
+    <?php if (getRole() === 'admin'): ?>
+        <a href="/project/pages/events/index.php">⚙️ Manage Events</a>
+        <a href="/project/pages/events/create.php">➕ Create Event</a>
+    <?php endif; ?>
+</nav>
+
+<div class="container py-4">
+
+    <div class="topbar mb-4">
+        <div>
+            Hello, <b><?php echo $user["name"]; ?></b> 👋
+        </div>
+        <a href="logout.php" class="btn btn-outline-dark btn-sm">Logout</a>
+    </div>
+
+    <div class="welcome mb-4">
+        <h4>Welcome back!</h4>
+        <p class="mb-0">Manage your events and activities easily.</p>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card-box text-center">
+                <div class="icon">📅</div>
+                <h6 class="mt-2 text-muted">Events</h6>
+                <div class="num"><?php echo $eventCount; ?></div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-box text-center">
+                <div class="icon">🎫</div>
+                <h6 class="mt-2 text-muted">Reservations</h6>
+                <div class="num"><?php echo $bookingCount; ?></div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card-box text-center">
+                <div class="icon">👤</div>
+                <h6 class="mt-2 text-muted">Status</h6>
+                <div class="num">Active</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h5 class="mb-3">Actions</h5>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <a href="view_event.php" class="text-decoration-none">
+                    <div class="card-box p-4 h-100">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">View Events</h6>
+                                <small class="text-muted">Explore available events</small>
+                            </div>
+                            <div class="icon">📅</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <div class="card-box p-4 h-100" style="opacity:0.6;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h6 class="mb-1">Coming soon</h6>
+                            <small class="text-muted">New features in development</small>
+                        </div>
+                        <div class="icon">✨</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include("../includes/footer.php"); ?>
+
+</body>
+</html>

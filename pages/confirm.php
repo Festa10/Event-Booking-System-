@@ -1,0 +1,149 @@
+
+<?php
+// 1. Merr emrin e eventit nga URL
+$eventName = isset($_GET['name']) ? $_GET['name'] : "Unknown Event";
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EventHub - Booking Successful</title>
+
+<link rel="stylesheet" href="../project/assets/css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #f4f6fb;
+    font-family: 'Poppins', Arial;
+}
+
+.page-center {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    margin-bottom: 50px; 
+}
+
+
+footer {
+    flex-shrink: 0;
+    background: #0f172a;
+    color: #cbd5e1;
+    padding: 40px 20px;
+    margin-top: auto; 
+}
+
+.footer-container {
+    display: flex; 
+    justify-content: space-between; 
+    padding: 20px 40px;
+    background-color: #1a1a2e;
+    color: #ffffff;
+}
+
+.footer-section {
+    flex: 1; 
+    padding: 0 15px;
+}
+
+.footer-section h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-section ul {
+    list-style: none; 
+    padding: 0;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 10px;
+    background-color: #161625;
+    font-size: 12px;
+}
+
+
+.navbar {
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 60px; 
+}
+
+.box {
+    background: white;
+    width: 100%;
+    max-width: 380px;
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+.title { text-align: center; font-weight: bold; margin-bottom: 20px; }
+input { border-radius: 10px !important; }
+.btn { border-radius: 10px; }
+</style>
+</head>
+<body>
+
+
+<nav class="navbar">
+<a href="/project/#top">🏠 Home</a>
+
+<a href="/project/pages/view_event.php">📅 Events</a>
+
+<a href="/project/pages/booking.php">🎟 Booking</a>
+
+<a href="/project/pages/contact.php">ℹ️ About</a>
+
+<a href="/project/pages/login.php">🔐 Login</a>
+
+<a href="/project/pages/register.php">📝 Register</a>
+
+<a href="/project/pages/events/index.php">⚙️ Manage Events</a>
+
+<a href="/project/pages/events/create.php">➕ Create Event</a>
+    
+</nav>
+
+<div class="main-content">
+<div class="card success-card p-5 text-center">
+<div class="icon-circle">✓</div>
+<h1 class="fw-bold text-dark">Booking Successful!</h1>
+<p class="text-muted mt-3">
+Thank you for choosing to attend: <br>
+<strong class="text-primary fs-5"><?php echo htmlspecialchars($eventName); ?></strong>
+</p>
+<div class="alert alert-info py-2 mt-3">
+<small>A confirmation email will be sent shortly.</small>
+</div>
+<a href="view_event.php" class="btn btn-primary btn-lg mt-4 w-100" style="border-radius: 12px;">
+Back to Events
+</a>
+</div>
+</div>
+
+<?php include("../includes/footer.php"); ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
+
+
